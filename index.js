@@ -36,6 +36,7 @@ var login = express()
 
   login.get('/signin/:signinArray', (req, res) => {
     var signinArr = req.params.signinArray;
+    console.log(siginArr);
     var signin = JSON.parse(signinArr);
     console.log(signin);
     var getUsersQuery = `SELECT * FROM login`;
