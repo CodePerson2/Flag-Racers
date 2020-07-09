@@ -1,0 +1,377 @@
+
+/*
+  Area containing track map, user bag, and end game button
+*/
+#userStatBar{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 80%;
+  height: 20%;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+/*
+  Area for user to see progress in race/view racetrack map
+*/
+#trackMap {
+  position: absolute;
+  height: 25%;
+  width: 20%;
+  bottom: 0px;
+  left:0px;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+#progress {
+  position: absolute;
+  width: 90%;
+  height: 20%;
+  background-color: #D3D3D3;
+  top: 40%;
+  left: 5%;
+}
+
+#barFill {
+  width: 1%;
+  height: 100%;
+  background-color: green;
+}
+
+/*
+  Area that shows item user has picked up (ie; what kind of boost/obstacle they have)
+*/
+#userBag {
+  position: absolute;
+  bottom: 0px;
+  left:50%;
+  background-color: #000000;
+}
+
+/*
+  Button details
+*/
+.endButton {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  color: white;
+  background-color: green;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 20px;
+}
+.endButton:hover {
+  color: white;
+  background-color: red;
+}
+
+/*
+  Road background
+*/
+#track {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #808080;
+}
+
+/*
+  Road line definition
+*/
+.line {
+  background-color: #FFFFFF;
+  height: 20%;
+  width:3%;
+}
+
+/*
+  Positioning of different road lines
+*/
+
+/* Leftmost lines*/
+#leftLine1 {
+  position: absolute;
+  left: 20%;
+}
+#leftLine2 {
+  position: absolute;
+  left: 20%;
+  top: 30%;
+}
+#leftLine3 {
+  position: absolute;
+  left: 20%;
+  top: 60%;
+}
+
+/* Righmost lines */
+#rightLine1 {
+  position: absolute;
+  right: 20%;
+}
+#rightLine2 {
+  position: absolute;
+  right:20%;
+  top: 30%;
+}
+#rightLine3 {
+  position: absolute;
+  right:20%;
+  top: 60%;
+}
+
+/* Middle lines */
+#midLine1 {
+  position: absolute;
+  right: 48%;
+}
+#midLine2 {
+  position: absolute;
+  right: 48%;
+  top: 30%;
+}
+#midLine3 {
+  position: absolute;
+  right: 48%;
+  top: 60%;
+}
+
+/*
+  Finish Line details
+*/
+.finishLine {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  top: 0px;
+  left: 0px;
+  background-color: #000000;
+}
+
+#square1 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 0px;
+}
+
+#square2 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 12.5%;
+}
+
+#square3 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 25%;
+}
+
+#square4 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 37.5%;
+}
+
+#square5 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 50%;
+}
+
+#square6 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 62.5%;
+}
+
+#square7 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 75%;
+}
+
+#square8 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 87.5%;
+}
+
+
+/*
+  Basic car definition
+*/
+.car {
+  position:relative;
+  background-color: yellow;
+  height: 125px;
+  width: 90px;
+  border-radius: 20px;
+}
+
+/*
+  Left front wheel placement
+*/
+.lfwheel {
+  position: absolute;
+  height: 20%;
+  width: 10%;
+  left: -10px;
+  top: 15px;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
+/*
+  Right front wheel placement
+*/
+.rfwheel {
+  position: absolute;
+  height: 20%;
+  width: 10%;
+  right: -10px;
+  top: 15px;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
+/*
+  Left back wheel placement
+*/
+.lbwheel {
+  position: absolute;
+  height: 20%;
+  width: 10%;
+  left: -10px;
+  bottom: 15px;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
+/*
+  Right back wheel placement
+*/
+.rbwheel {
+  position: absolute;
+  height: 20%;
+  width: 10%;
+  right: -10px;
+  bottom: 15px;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
+/*
+  Front windshield placement
+*/
+.fwindshield {
+  position: absolute;
+  height: 20%;
+  width: 70%;
+  top: 25%;
+  left: 15%;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+/*
+  Back windshield placement
+*/
+.bwindshield {
+  position: absolute;
+  height: 10%;
+  width: 70%;
+  bottom: 20%;
+  left: 15%;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+/*
+  Right front light
+*/
+.rlight {
+  position: absolute;
+  height:10px;
+  width: 20px;
+  top:-5px;
+  left: 10px;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+}
+
+/*
+  Left front light
+*/
+.llight {
+  position: absolute;
+  height:10px;
+  width: 20px;
+  top:-5px;
+  right: 10px;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+}
+
+/*
+  User car details
+*/
+#userCar {
+  position: absolute;
+  bottom: 30%;
+  left: 7%;
+}
+
+/*
+  Bot car details
+*/
+#botCar1 {
+  position: absolute;
+  bottom: 30%;
+  left: 33%;
+}
+#botCar2 {
+  position: absolute;
+  bottom: 30%;
+  left: 60%;
+}
+#botCar3 {
+  position: absolute;
+  bottom: 30%;
+  left: 86%;
+}
+
+/*
+.pickUp {
+
+}
+*/
