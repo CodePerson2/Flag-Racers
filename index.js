@@ -1,13 +1,13 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
-
+/*
 const { Pool } = require('pg');
 var pool;
 pool = new Pool({
-  connectionString: process.env.DATABASE_URL  
+  connectionString: process.env.DATABASE_URL  //database init
 });
-
+*/
 var login = express()
   login.use(express.static(path.join(__dirname, 'public')))
   login.use(express.json())
