@@ -20,8 +20,11 @@ var login = express()
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
+    res.send(signup);                     //signup data
 
-    if(signup[0] == 'plcholder'){
+    // database insert 
+    /*
+    if(true){
       var getUsersQuery = `INSERT INTO login(name, password) VALUES('` + n[1] + `', `  + n[2] + `') RETURNING id`;
     }
     pool.query(getUsersQuery, (error, result) => {
@@ -32,14 +35,15 @@ var login = express()
       res.send(results);
     })
     // access database using uid
+    */
   });
 
   login.get('/signin/:signinArray', (req, res) => {
     var signinArr = req.params.signinArray;
-    console.log(siginArr);
     var signin = JSON.parse(signinArr);
-    console.log(signin);
-    var getUsersQuery = `SELECT * FROM login`;
+    res.send(signin);                       //signin data
+    /*
+    var getUsersQuery = `SELECT * FROM login`;    //database connection
     
     
     pool.query(getUsersQuery, (error, result) => {
@@ -49,6 +53,7 @@ var login = express()
       res.send(results);
     })
     // access database using uid
+    */
   });
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))

@@ -1,9 +1,6 @@
 // Get the modal
 var modal = document.getElementById('id01');
 
-function myFunction() {
-  document.getElementById("SignUp").submit();
-}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -12,22 +9,37 @@ window.onclick = function(event) {
     }
 }
 
-function get(name, password, type, password2 = NULL) {
+function send(type) {
     var xhttp;
-    var type;
-    var loc = "/signin/";
-    var signin = {name: name, password: password};
+    var loc;
+    var name, signin, password, password2;
+    if (type == "GET"){
+        loc = '/signin/';
+        name = document.getElementById("signinUser").value;
+        password = document.getElementById("signinPass").value;
+        signin = {name: name, password: password};
+        
+    }
+    else{
+        loc = '/signup/';
+        name = document.getElementById("signupUser").value;
+        password = document.getElementById("signupPass").value;
+        password2 = document.getElementById("signupPass2").value;
+        signin = {name: name, password: password, password2: password2};
+    }
+    console.log(loc);
+    
 
     signin = JSON.stringify(signin);
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-          
+            var res = JSON.parse(this.responseText);
+            console.log(res);
           }
             
             
       }
-    };
-    xhttp.open(type, loc+person, true);
+    xhttp.open(type, loc+signin, true);
     xhttp.send();
 }
