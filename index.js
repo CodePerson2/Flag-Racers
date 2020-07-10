@@ -29,7 +29,7 @@ var login = express()
 
     // database insert 
     if(true){
-      var getUsersQuery = `INSERT INTO login(name, password) VALUES('` + signup.name + `', `  + signup.password + `', `  + admin + `', `  + 0 +`') RETURNING id`;
+      var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES('` + signup.name + `', `  + signup.password + `', `  + admin + `', `  + 0 +`') RETURNING id`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
