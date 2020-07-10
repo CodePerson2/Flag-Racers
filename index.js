@@ -1,13 +1,13 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
-/*
+
 const { Pool } = require('pg');
 var pool;
 pool = new Pool({
   connectionString: process.env.DATABASE_URL  //database init
 });
-*/
+
 var login = express()
   login.use(express.static(path.join(__dirname, 'public')))
   login.use(express.json())
@@ -20,13 +20,16 @@ var login = express()
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
+    var admin;
+    if(signup.admin == true){
+      admin = 1;
+    }
     //res.send(signup);                     //signup data 
-    res.redirect('http://exmple.com'+req.url);                                          //signup.name signup.password signup.password2 signup.adminCheck
+                                            //signup.name signup.password signup.password2 signup.adminCheck
 
     // database insert 
-    /*
     if(true){
-      var getUsersQuery = `INSERT INTO login(name, password) VALUES('` + n[1] + `', `  + n[2] + `') RETURNING id`;
+      var getUsersQuery = `INSERT INTO login(name, password) VALUES('` + signup.name + `', `  + signup.password + `', `  + admin + `', `  + 0 +`') RETURNING id`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
@@ -36,15 +39,15 @@ var login = express()
       res.send(results);
     })
     // access database using uid
-    */
+    
   });
 
   login.get('/signin/:signinArray', (req, res) => {
     var signinArr = req.params.signinArray;
     var signin = JSON.parse(signinArr);
-    res.send(signin);                       //signin data
-    /*
-    var getUsersQuery = `SELECT * FROM login`;    //database connection
+    //res.send(signin);                       //signin data
+    
+    var getUsersQuery = `SELECT * FROM login where username = '` + signin.name +`' and password = '` + signin.password + `'`;    //database connection
                                                   //signup.name signup.password
     
     pool.query(getUsersQuery, (error, result) => {
@@ -54,7 +57,7 @@ var login = express()
       res.send(results);
     })
     // access database using uid
-    */
+    
   });
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
