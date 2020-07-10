@@ -55,12 +55,13 @@ var login = express()
         res.send(error);
       var results = {'rows': result.rows}
       //results.rows[0]
+      var res;
       if(results.rows == ''){
         var url = "flag.html?" + signin.name;
-        var res = {ans: "success", url: url};
+        res = true;//{ans: "success", url: url};
       }
       else{
-        var res = {ans: "false"};
+        res =false; //{ans: "false"};
       }
       res.send(res);
     })
