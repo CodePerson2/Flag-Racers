@@ -20,7 +20,8 @@ var login = express()
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
-    res.send(signup);                     //signup data
+    res.send(signup);                     //signup data 
+                                              //signup.name signup.password signup.password2 signup.adminCheck
 
     // database insert 
     /*
@@ -44,7 +45,7 @@ var login = express()
     res.send(signin);                       //signin data
     /*
     var getUsersQuery = `SELECT * FROM login`;    //database connection
-    
+                                                  //signup.name signup.password
     
     pool.query(getUsersQuery, (error, result) => {
       if(error)
