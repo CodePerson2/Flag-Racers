@@ -39,7 +39,7 @@ function send(type) {
             var res = JSON.parse(this.responseText);
             console.log(res);
             if(res == ''){alert("Incorrect username or password");}
-            else if(res.rows[] == null){
+            else if(res.rows[0] == null){
                 console.log('here');
 
             }
