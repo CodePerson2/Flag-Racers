@@ -54,7 +54,8 @@ var login = express()
       if(error)
         res.send(error);
       var results = {'rows': result.rows}
-      if((results.rows[0]).length != null){
+      //results.rows[0]
+      if(false){
         var ans = true;
       }
       else{
