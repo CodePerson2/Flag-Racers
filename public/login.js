@@ -35,10 +35,15 @@ function send(type) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            var res = JSON.parse(this.responseText);
             
+            var res = JSON.parse(this.responseText);
             console.log(res);
+            if(true){alert("Incorrect username or password");}
+            else{
+                var url = "flag.html?" + name;
+                window.location.replace(url);
+
+            }
           }
             
             
