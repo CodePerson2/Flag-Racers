@@ -56,7 +56,7 @@ var login = express()
       var results = {'rows': result.rows}
       //results.rows[0]
       
-      var res = (results.rows == '');
+      var res = (results == '');
       /*
       if(results.rows == ''){
         //var url = "flag.html?" + signin.name;
