@@ -20,7 +20,7 @@ var login = express()
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
-    var admin;
+    var admin = 0;
     if(signup.admin == true){
       admin = 1;
     }
@@ -29,7 +29,7 @@ var login = express()
 
     // database insert 
     if(true){
-      var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES("` + signup.name + `", "`  + signup.password + `", `  + admin + `, `  + 0 +`)`;
+      var getUsersQuery = `INSERT INTO login (username, password, admin, logincount) VALUES("` + signup.name + `", "`  + signup.password + `", `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
