@@ -21,7 +21,7 @@ var login = express()
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
     var admin = 0;
-    if(signup.admin == true){
+    if(signup.adminCheck == true){
       admin = 1;
     }
     //res.send(signup);                     //signup data 
@@ -54,8 +54,8 @@ var login = express()
       if(error)
         res.send(error);
       var results = {'rows': result.rows}
-      
-      res.send(results);
+      //if(result[])
+      res.send(results[0]);
     })
     // access database using uid
     
