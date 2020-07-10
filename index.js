@@ -56,7 +56,7 @@ var login = express()
       var results = {'rows': result.rows}
       //results.rows[0]
 
-      res.send(results.rows == '');
+      res.send(results);
       if(signin.admin ===1){
         return res.redirect('/admin');
       }
