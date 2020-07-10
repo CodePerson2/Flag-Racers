@@ -60,7 +60,7 @@ var login = express()
       else{
         var ans = false;
       }
-      res.send(results.rows);
+      res.send(results);
     })
     // access database using uid
     
