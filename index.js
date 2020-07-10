@@ -57,7 +57,7 @@ var login = express()
       //results.rows[0]
       var res;
       if(results.rows == ''){
-        var url = "flag.html?" + signin.name;
+        //var url = "flag.html?" + signin.name;
         res = true;//{ans: "success", url: url};
       }
       else{
