@@ -20,8 +20,8 @@ var login = express()
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
-    res.send(signup);                     //signup data 
-                                              //signup.name signup.password signup.password2 signup.adminCheck
+    //res.send(signup);                     //signup data 
+    res.redirect('http://exmple.com'+req.url);                                          //signup.name signup.password signup.password2 signup.adminCheck
 
     // database insert 
     /*

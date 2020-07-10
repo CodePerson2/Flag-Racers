@@ -2,8 +2,10 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&family=Racing+Sans+One&display=swap" rel="stylesheet">
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
+body {font-family: 'Hind Vadodara', Arial, Helvetica, sans-serif;}
 form {border: 3px solid #f1f1f1;}
 
 input[type=text], input[type=password] {
@@ -98,6 +100,13 @@ input[type=text], input[type=password] {
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+#title{
+  font-family: 'Racing Sans One', cursive;
+  margin: auto;
+  font-size: 50px;
+  text-align: center;
+}
+
 #all{
   position: relative;
   margin: auto;
@@ -153,7 +162,7 @@ input[type=text], input[type=password] {
 </head>
 <body>
 <div id="all">
-  <h2>Login To Flag Racers</h2>
+  <h1 id="title">Flag Racer</h2>
 
   <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign-Up</button>
 
