@@ -2,7 +2,7 @@
   Sends user to 'race finished' page
 */
 function endGame() {
-    location.href= "endgame.html";
+    location.href= "endPage.html";
   }
   
   /*
