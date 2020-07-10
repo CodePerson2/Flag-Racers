@@ -24,42 +24,47 @@ var login = express()
     if(signup.adminCheck == true){
       admin = 1;
     }
-    //res.send(signup);                     //signup data 
+    //res.send(signup);                     //signup data
                                             //signup.name signup.password signup.password2 signup.adminCheck
 
-    // database insert 
+    // database insert
     if(true){
       var getUsersQuery = `INSERT INTO login2(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
         res.send(error);
-      
+
       var results = {'rows': result.rows}
       res.send(results);
     })
     // access database using uid
-    
+
   });
 
   login.get('/signin/:signinArray', (req, res) => {
     var signinArr = req.params.signinArray;
     var signin = JSON.parse(signinArr);
     //res.send(signin);                       //signin data
-    
+
     var getUsersQuery = `SELECT * FROM login2 where username = '` + signin.name +`' and password = '` + signin.password + `'`;    //database connection
                                                   //signup.name signup.password
-    
+
     pool.query(getUsersQuery, (error, result) => {
       if(error)
         res.send(error);
       var results = {'rows': result.rows}
       //results.rows[0]
-      
+
       res.send(results.rows == '');
+      if(signin.admin ===1){
+        return res.redirect(/admin);
+      }else{
+        return 1;
+      }
     })
     // access database using uid
-    
+
   });
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
