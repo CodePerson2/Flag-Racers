@@ -29,7 +29,7 @@ var login = express()
 
     // database insert 
     if(true){
-      var getUsersQuery = `INSERT INTO login (username, password) VALUES("` + signup.name + `", "`  + signup.password + `")`;
+      var getUsersQuery = `INSERT INTO login2 (username, password, admin, logincount) VALUES("` + signup.name + `", "`  + signup.password + `", `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
@@ -47,7 +47,7 @@ var login = express()
     var signin = JSON.parse(signinArr);
     //res.send(signin);                       //signin data
     
-    var getUsersQuery = `SELECT * FROM login where username = '` + signin.name +`' and password = '` + signin.password + `'`;    //database connection
+    var getUsersQuery = `SELECT * FROM login2 where username = "` + signin.name +`" and password = "` + signin.password + `"`;    //database connection
                                                   //signup.name signup.password
     
     pool.query(getUsersQuery, (error, result) => {
