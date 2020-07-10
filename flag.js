@@ -1,12 +1,12 @@
 var flagsArray;
-
+var flagURL;
 function setFlag(id){
   var flagArr = flagsArray[id];
   $('#flag-name').empty();
   $('#flag-facts').empty();
   $('#flag-name').attr({style: 'content:URL(' + flagArr.flag + ')'});
   $('#flag-name').text(flagArr.name);
-  
+  flagURL = flagArr.flag;
   $('#flag-facts').html("Name: " + flagArr.name + '<br>' + "Language: " + flagArr.languages[0].name + '<br>' + "Pop: " + flagArr.population + '<br>' + "Native Name: " + flagArr.nativeName + '<br>' + "Capital: " + flagArr.capital + '<br>' + "Subregion: " + flagArr.subregion + '<br>' + "Currency: " + flagArr.currencies[0].name);
 }
 
@@ -43,4 +43,8 @@ function allFlags(){
   xhttp.open('GET', loc, true);
   xhttp.send();
 
+}
+function selectFlag(){
+  alert(flagURL);
+  window.location = "https://www.google.com/"
 }

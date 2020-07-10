@@ -9,14 +9,18 @@
 		<link rel="stylesheet" type="text/css" href="flag.css" media="screen"/>
 		<script defer src="flag.js"></script>
 	</head>
-	<body id = "body" onload = "allFlags()">
-	  <div id="flag-all">
-		<div id = "flag-cont"></div>
-		<div id = "selected-flag">
-		  <div id = "flag-name"></div>
-		  <div id = "flag-facts"></div>
-		</div>
-	  </div>
-  
-	</body>
+	<body id = "body" onload="allFlags()">
+  <h1 id="title">Select A Flag To Race With!</h1>
+  <div id="flag-all">
+    
+    <div id = "flag-cont"></div>
+    <div id = "selected-flag">
+      <div id = "flag-name"></div>
+      <div id = "flag-facts"></div>
+      <button id="select" onclick="selectFlag()">Select Flag</button>
+    </div>
+  </div>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&family=Racing+Sans+One&display=swap" rel="stylesheet">
+</body>
 </html>
