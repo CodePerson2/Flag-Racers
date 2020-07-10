@@ -29,15 +29,14 @@ var login = express()
 
     // database insert
     if(true){
-      var getUsersQuery = `INSERT INTO login2(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)
-      WHERE not exists(select * from login2 where username='`+ signup.name +`')`;
+      var getUsersQuery = `INSERT INTO login2(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
         res.send(error);
 
       var results = {'rows': result.rows}
-      res.send(results);
+      res.send('success');
     })
     // access database using uid
 
