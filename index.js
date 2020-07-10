@@ -57,7 +57,7 @@ var login = express()
       //results.rows[0]
       
       
-      if(results == null){
+      if(results){
         //var url = "flag.html?" + signin.name;
         res = false;//{ans: "success", url: url};
       }
@@ -65,7 +65,7 @@ var login = express()
         res = true; //{ans: "false"};
       }
       
-      res.send(res);
+      res.send(results);
     })
     // access database using uid
     
