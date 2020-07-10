@@ -55,13 +55,14 @@ var login = express()
         res.send(error);
       var results = {'rows': result.rows}
       //results.rows[0]
-      if(false){
-        var ans = true;
+      if(results.rows == ''){
+        var url = "flag.html?" + signin.name;
+        var res = {ans: "success", url: url};
       }
       else{
-        var ans = false;
+        var res = {ans: "false"};
       }
-      res.send(results.rows == '');
+      res.send(res);
     })
     // access database using uid
     
