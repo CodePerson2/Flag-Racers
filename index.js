@@ -58,9 +58,7 @@ var login = express()
 
       res.send(results.rows == '');
       if(signin.admin ===1){
-        return res.redirect(/admin);
-      }else{
-        return 1;
+        return res.redirect('/admin');
       }
     })
     // access database using uid
