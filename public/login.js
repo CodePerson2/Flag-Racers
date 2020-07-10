@@ -38,8 +38,11 @@ function send(type) {
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            if(res){alert("Incorrect username or password");}
-            else if(!res){
+            if(res == 'success'){alert("Account made");}
+            else if(res.rows == ''){
+                alert('username or password is incorrect');
+            }
+            else if(res.rows[0].username != ''){
                 var url = "flag.html?" + name;
                 window.location.replace(url);
 
