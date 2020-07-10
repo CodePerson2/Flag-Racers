@@ -2,7 +2,7 @@
   Sends user to 'race finished' page
 */
 function endGame() {
-    location.href= "flag.html";
+    location.href= "endgame.html";
   }
   
   /*
@@ -17,5 +17,5 @@ function endGame() {
     (empty atm)
   */
   function selectFlag() {
-  
+    location.href= "flag.html"
   }
