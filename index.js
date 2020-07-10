@@ -61,7 +61,7 @@ var login = express()
       else{
         var ans = false;
       }
-      res.send(results.rows == null);
+      res.send(results.rows.length);
     })
     // access database using uid
     
