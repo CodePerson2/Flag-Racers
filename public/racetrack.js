@@ -2,14 +2,14 @@
   Sends user to 'race finished' page
 */
 function endGame() {
-    location.href= "https://racetrackgp.herokuapp.com/endPage.html";
+    location.href= "flag.html";
   }
   
   /*
     Sends user to racetrack page
   */
   function startGame() {
-    location.href= "https://racetrackgp.herokuapp.com/racetrack.html";
+    location.href= "racetrack.html";
   }
   
   /*
