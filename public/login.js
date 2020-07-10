@@ -12,7 +12,7 @@ window.onclick = function(event) {
 function send(type) {
     var xhttp;
     var loc;
-    var name, signin, password, password2;
+    var name, signin, password, password2, adminCheck;
     if (type == "GET"){
         loc = '/signin/';
         name = document.getElementById("signinUser").value;
@@ -25,7 +25,8 @@ function send(type) {
         name = document.getElementById("signupUser").value;
         password = document.getElementById("signupPass").value;
         password2 = document.getElementById("signupPass2").value;
-        signin = {name: name, password: password, password2: password2};
+        adminCheck = document.getElementById("admin-check").checked;
+        signin = {name: name, password: password, password2: password2, adminCheck: adminCheck};
     }
     console.log(loc);
     
