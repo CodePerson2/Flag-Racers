@@ -42,7 +42,7 @@ function send(type) {
             else if(res == ''){
                 alert('username or password is incorrect');
             }
-            else if(res.rows[0].username == username){
+            else if(res.rows[0].username == name){
                 var url = "flag.html?" + name;
                 window.location.replace(url);
 
