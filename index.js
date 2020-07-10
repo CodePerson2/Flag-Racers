@@ -29,7 +29,8 @@ var login = express()
 
     // database insert
     if(true){
-      var getUsersQuery = `INSERT INTO login2(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
+      var getUsersQuery = `INSERT INTO login2(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)
+      WHERE not exists(select * from login2 where username='`+ signup.name +`')`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
