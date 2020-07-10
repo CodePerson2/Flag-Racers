@@ -55,7 +55,7 @@ var login = express()
         res.send(error);
       var results = {'rows': result.rows}
       //if(result[])
-      res.send(results.rows.[0]);
+      res.send(results.rows[0]);
     })
     // access database using uid
     
