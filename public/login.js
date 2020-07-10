@@ -39,7 +39,7 @@ function send(type) {
             var res = JSON.parse(this.responseText);
             console.log(res);
             if(res == 'success'){alert("Account made");}
-            else if(res == ''){
+            else if(res.rows == ''){
                 alert('username or password is incorrect');
             }
             else if(res.rows[0].username != ''){
