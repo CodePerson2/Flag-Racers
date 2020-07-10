@@ -39,10 +39,13 @@ function send(type) {
             var res = JSON.parse(this.responseText);
             console.log(res);
             if(res){alert("Incorrect username or password");}
-            else{
+            else if(!res){
                 var url = "flag.html?" + name;
                 window.location.replace(url);
 
+            }
+            else{
+                console.log(res);
             }
           }
             
