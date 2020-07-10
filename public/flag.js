@@ -46,5 +46,5 @@ function allFlags(){
 }
 function selectFlag(){
   var val = window.location.href.split('?');
-  window.location = "racetrack.html" + val[1];
+  window.location = "racetrack.html?" + val[1] + '?' +flagURL;
 }
