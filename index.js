@@ -54,13 +54,13 @@ var login = express()
       if(error)
         res.send(error);
       var results = {'rows': result.rows}
-      if((results.rows[0]).length > 0){
+      if((results.rows[0]).length != null){
         var ans = true;
       }
       else{
         var ans = false;
       }
-      res.send(ans);
+      res.send(results.rows[0]).length);
     })
     // access database using uid
     
