@@ -34,7 +34,11 @@ var login = express()
       var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
-      if(error){res.send(error);}
+      if(error){
+        var e = JSON.parse(error);
+        console.log(e);
+        res.send(error);
+      }
       else{
         var results = {'rows': result.rows}
         res.send(JSON.stringify('success'));
