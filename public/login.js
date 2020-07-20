@@ -13,6 +13,7 @@ function send(type) {
     var xhttp;
     var loc;
     var name, signin, password, password2, adminCheck;
+    
     if (type == "GET"){
         loc = '/signin/';
         name = document.getElementById("signinUser").value;
@@ -27,8 +28,12 @@ function send(type) {
         password2 = document.getElementById("signupPass2").value;
         adminCheck = document.getElementById("admin-check").checked;
         signin = {name: name, password: password, password2: password2, adminCheck: adminCheck};
+        if(password != password2){
+            alert("passwords do not match.");
+        }
     }
     console.log(loc);
+    
     
 
     signin = JSON.stringify(signin);
