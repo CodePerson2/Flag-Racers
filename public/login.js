@@ -44,14 +44,20 @@ function send(type) {
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            if(res == 'success'){alert("Account made");}
-            else if(res.rows == ''){
-                alert('username or password is incorrect');
-            }
-            else if(res.rows[0].username != ''){
-                var url = "flag.html?" + name;
-                window.location.replace(url);
+            if(res.res == 0){
+                var data = res.data;
+                if(data == 'success'){alert("Account made");}
+                else if(data.rows == ''){
+                    alert('username or password is incorrect');
+                }
+                else if(data.rows[0].username != ''){
+                    var url = "flag.html?" + name;
+                    window.location.replace(url);
 
+                }
+            }
+            else if(res.res == 1){
+                alert("username already exists");
             }
             else{
                 console.log(res);

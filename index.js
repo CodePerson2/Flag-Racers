@@ -35,13 +35,11 @@ var login = express()
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error){
-        var e = JSON.parse(error);
-        console.log(e);
-        res.send(error);
+        res.send({res : 1, data : error});
       }
       else{
         var results = {'rows': result.rows}
-        res.send(JSON.stringify('success'));
+        res.send({res : 0, data : JSON.stringify('success')});
       }  
 
       
