@@ -21,6 +21,11 @@ var login = express()
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
     var admin = 0;
+
+    //var getUsersQuery = `SELECT * FROM login where username = '` + signin.name +`'`;
+
+
+
     if(signup.adminCheck == true){
       admin = 1;
     }
@@ -29,11 +34,13 @@ var login = express()
       var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
-      if(error)
-        res.send(error);
+      if(error){res.send(error);}
+      else{
+        var results = {'rows': result.rows}
+        res.send(JSON.stringify('success'));
+      }  
 
-      var results = {'rows': result.rows}
-      res.send(JSON.stringify('success'));
+      
     })
     // access database using uid
 
