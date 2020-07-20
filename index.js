@@ -44,7 +44,7 @@ var login = express()
     var signin = JSON.parse(signinArr);
     //res.send(signin);                       //signin data
 
-    var getUsersQuery = `SELECT * FROM login2 where username = '` + signin.name +`' and password = '` + signin.password + `'`;    //database connection
+    var getUsersQuery = `SELECT * FROM login where username = '` + signin.name +`' and password = '` + signin.password + `'`;    //database connection
                                                   //signup.name signup.password
 
     pool.query(getUsersQuery, (error, result) => {
