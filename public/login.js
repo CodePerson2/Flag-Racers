@@ -59,9 +59,6 @@ function send(type) {
             else if(res.res == 1){
                 alert("username already exists");
             }
-            else{
-                console.log(res);
-            }
           }
             
             
