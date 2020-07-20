@@ -30,6 +30,7 @@ function send(type) {
         signin = {name: name, password: password, password2: password2, adminCheck: adminCheck};
         if(password != password2){
             alert("passwords do not match.");
+            return;
         }
     }
     console.log(loc);
