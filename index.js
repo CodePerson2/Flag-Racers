@@ -24,12 +24,9 @@ var login = express()
     if(signup.adminCheck == true){
       admin = 1;
     }
-    //res.send(signup);                     //signup data
-                                            //signup.name signup.password signup.password2 signup.adminCheck
 
-    // database insert
     if(true){
-      var getUsersQuery = `INSERT INTO login2(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
+      var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error)
