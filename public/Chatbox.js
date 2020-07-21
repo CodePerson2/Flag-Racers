@@ -3,14 +3,7 @@ var userid = 1;
 var input = document.getElementById("inp");
 console.log(input);
 
-input.addEventListener("keyup", function(event) {
-  alert("works");
-    if(event.keyCode === 13){
-        //event.preventDefault();
-        alert("works");
-        addFriend(inp.value);
-    }
-});
+input.addEventListener("keyup", alert("hi"));
 
 function addFriend(friend){
     var xhttp;
