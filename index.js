@@ -72,4 +72,25 @@ var login = express()
 
   });
 
+  login.post('/addfriend/:val', (req, res) => {
+    var val = req.params.val;
+    var val = JSON.parse(val);
+    //res.send(signin);                       //signin data
+
+    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend +`'`;
+                                                  //signup.name signup.password
+
+    pool.query(getUsersQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }
+      else{
+        res.send({res : 0, data : result.rows});
+      }
+     
+    })
+    // access database using uid
+
+  });
+
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
