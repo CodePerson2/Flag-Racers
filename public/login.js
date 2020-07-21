@@ -54,6 +54,9 @@ function send(type) {
                     window.location.replace(url);
 
                 }
+                else{
+                    console.log("nothing");
+                }
             }
             else if(res.res == 1){
                 alert("username already exists");
