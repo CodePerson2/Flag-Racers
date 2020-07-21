@@ -2,7 +2,8 @@
 var userid = 1;
 var inp = document.getElementById("inp");
 
-inp.addEventListener("keyup", function(event){
+inp.addEventListener("keyup", function(event) {
+  alert("works");
     if(event.keyCode === 13){
         event.preventDefault();
         alert("works");
