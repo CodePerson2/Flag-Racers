@@ -5,7 +5,7 @@ var inp = document.getElementById("inp");
 inp.addEventListener("keyup", function(event){
     if(event.keyCode === 13){
         event.preventDefault();
-
+        alert("works");
         addFriend(inp.value);
     }
 });
