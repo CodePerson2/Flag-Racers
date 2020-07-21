@@ -43,7 +43,7 @@ function send(type) {
       if (this.readyState == 4 && this.status == 200) {
             
             var res = JSON.parse(this.responseText);
-            //console.log(res);
+            console.log(res);
             if(res.res == 0){
                 if(res.res == 'success'){alert("Account made");}
                 else if(res.data.rows == ''){
