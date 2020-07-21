@@ -2,7 +2,12 @@ var userid = 1;
 var input = document.getElementById("inp");
 console.log(input);
 
-input.addEventListener("keyup", alert("hi"));
+input.addEventListener("keyup", function(e){
+
+    if(e.keyCode === 13){
+        alert("hi");
+    }
+});
 
 function addFriend(friend){
     var xhttp;
