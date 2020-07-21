@@ -49,7 +49,7 @@ function send(type) {
                 else if(res.data.rows == ''){
                     alert('username or password is incorrect');
                 }
-                else if(res.data.rows[0].username != ''){
+                else if(res.data[0].username != ''){
                     var url = "flag.html?" + name;
                     window.location.replace(url);
 
