@@ -179,13 +179,13 @@ input[type=text], input[type=password] {
 
       <div class="container">
         <label for="uname"><b>Create a Username</b></label>
-        <input id = "signupUser" type="text" placeholder="Enter Username" name="uname" required>
+        <input id = "signupUser" type="text" placeholder="Enter Username" name="uname" maxlength="29" required>
 
         <label for="psw"><b>Create a Password</b></label>
-        <input id = "signupPass"type="password" placeholder="Enter Password" name="psw" required>
+        <input id = "signupPass"type="password" placeholder="Enter Password" name="psw" maxlength="29" required>
 
         <label for="psw"><b>Re-enter Password</b></label>
-        <input id = "signupPass2" type="password" placeholder="Enter Password" name="rpsw" required>
+        <input id = "signupPass2" type="password" placeholder="Enter Password" name="rpsw" maxlength="29" required>
 
         <input value = "Submit" type="button" onclick="send('POST')">
         <label>
@@ -210,10 +210,10 @@ input[type=text], input[type=password] {
 
     <div class="container">
       <label for="uname"><b>Username</b></label>
-      <input id = "signinUser" type="text" placeholder="Enter Username" name="uname" required>
+      <input id = "signinUser" type="text" placeholder="Enter Username" name="uname" maxlength="29" required>
 
       <label for="psw"><b>Password</b></label>
-      <input id = "signinPass" type="password" placeholder="Enter Password" name="psw" required>
+      <input id = "signinPass" type="password" placeholder="Enter Password" name="psw" maxlength="29" required>
           
       <button onclick="send('GET')">Login</button>
       <label>
