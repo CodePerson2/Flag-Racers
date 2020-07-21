@@ -21,6 +21,7 @@ function addFriend(friend){
             
             
       }
+    }
     xhttp.open("POST", loc+val, true);
     xhttp.send();
 }
