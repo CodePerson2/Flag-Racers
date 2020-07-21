@@ -5,7 +5,7 @@ console.log(input);
 input.addEventListener("keyup", function(e){
 
     if(e.keyCode === 13){
-        alert("hi");
+        addFriend(input.val);
     }
 });
 
