@@ -43,14 +43,13 @@ function send(type) {
       if (this.readyState == 4 && this.status == 200) {
             
             var res = JSON.parse(this.responseText);
-            console.log(res);
+            //console.log(res);
             if(res.res == 0){
-                var data = res.data;
-                if(data == 'success'){alert("Account made");}
-                else if(data.rows == ''){
+                if(res.res == 'success'){alert("Account made");}
+                else if(res.data.rows == ''){
                     alert('username or password is incorrect');
                 }
-                else if(data.rows[0].username != ''){
+                else if(res.data.rows[0].username != ''){
                     var url = "flag.html?" + name;
                     window.location.replace(url);
 
