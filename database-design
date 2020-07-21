@@ -1,0 +1,25 @@
+current database design
+
+create table login (
+  userID int GENERATED ALWAYS AS IDENTITY,
+  username char(30) UNIQUE, 
+  password char(30), admin int, 
+  logincount int, primary key(userID)
+);
+
+create table chat (
+  chatID int GENERATED ALWAYS AS IDENTITY,
+  user1 INT NOT NULL,
+  user2 INT NOT NULL,
+  primary key(chatID),
+  CONSTRAINT us1 foreign key(user1) references login(userID),
+  CONSTRAINT us2 foreign key(user2) references login(userID)
+);
+
+create table message (
+  messageID int GENERATED ALWAYS AS IDENTITY,
+  userID int not null,
+  message char(512),
+  chatID int not null,
+  constraint cht foreign key(chatID) references chat(chatID)
+);
