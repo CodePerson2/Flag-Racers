@@ -57,12 +57,13 @@ var login = express()
                                                   //signup.name signup.password
 
     pool.query(getUsersQuery, (error, result) => {
-      if(error)
-        res.send(error);
-      var results = {'rows': result.rows}
-      //results.rows[0]
+      if(error){
+        res.send({res : 1, data : error});
+      }
 
-      res.send(results);
+      else{
+        res.send({res : 0, data : result.rows});
+      }
       if(signin.admin ===1){
         return res.redirect('/admin');
       }
