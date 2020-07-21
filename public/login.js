@@ -49,6 +49,9 @@ function send(type) {
                 else if(res.data.rows == ''){
                     alert('username or password is incorrect');
                 }
+                else if(res.data.length == 0){
+                    console.log("wrong password/username");
+                }
                 else if(res.data[0].username != ''){
                     var url = "flag.html?" + name;
                     window.location.replace(url);
