@@ -62,6 +62,7 @@ var login = express()
       }
 
       else{
+        console.log(result.rows);
         res.send({res : 0, data : result.rows});
       }
       if(signin.admin ===1){
