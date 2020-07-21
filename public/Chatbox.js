@@ -1,11 +1,12 @@
 //add friend input
 var userid = 1;
-var inp = document.getElementById("inp");
+var input = document.getElementById("inp");
+console.log(input);
 
-inp.addEventListener("keyup", function(event) {
+input.addEventListener("keyup", function(event) {
   alert("works");
     if(event.keyCode === 13){
-        event.preventDefault();
+        //event.preventDefault();
         alert("works");
         addFriend(inp.value);
     }
