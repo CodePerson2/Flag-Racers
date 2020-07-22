@@ -127,15 +127,19 @@ var login = express()
             user = result.rows[1];
             friend = result.rows[0];
           }
-          if(val.user == friend.userid){
-            res.send({res : 2, data : "Cant be friends with yourself!"});
-            return;
-          }
+          
           alreadyfriend(res, val.user, (result.rows[0]).userid, user.username, (result.rows[0]).username);
           
         }
-        else{
+        else if(result.rows.length > 0){
+          if(val.user == result.rows[0].userid){
+            res.send({res : 2, data : "Cant be friends with yourself!"});
+            return;
+          }
           res.send({res : 2, data : "username does not exist"});
+        }
+        else{
+          res.send({res : 2, data : "error"});
         }
       }
     })
