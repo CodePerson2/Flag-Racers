@@ -65,8 +65,8 @@ function insertfriends(values){
 
         nm.classList.add("groupName");
         nm.innerText = friendname;
-        item.innerHTML = nm;
-        item.setAttribute("onclick", "openchat(" + friendid + ", " + friendname + ")");
+        item.innerText = nm;
+        item.setAttribute("onclick", "openchat(" + friendid + ", '" + friendname + "')");
         document.getElementById("chatlist").append(item);
 
     }
