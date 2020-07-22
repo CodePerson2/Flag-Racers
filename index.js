@@ -128,7 +128,7 @@ var login = express()
             friend = result.rows[0];
           }
           
-          alreadyfriend(res, val.user, friend.userid, user.username, friend.username);
+          alreadyfriend(res, user.userid, friend.userid, user.username, friend.username);
           
         }
         else if(result.rows.length > 0){
