@@ -81,7 +81,6 @@ var login = express()
       }
       else{
         res.send({res : 0, data : "chat made!"});
-        
       }
     })
   }
@@ -101,10 +100,8 @@ var login = express()
         }
         else{
           addfriend(res, userid, friendid);
-        }
-        
+        }  
       }
-      
     })
   }
 
@@ -112,8 +109,7 @@ var login = express()
     var val = req.params.val;
     var val = JSON.parse(val);
 
-    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `'`;
-                                                 
+    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `'`;                                         
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
@@ -121,17 +117,16 @@ var login = express()
       }
       else{
         if(result.rows.length > 0){
-          //res.send({test: "hi", res : val.user, data : });
-          
+          if(val.user == (result.rows[0]).userid){
+            res.send({res : 2, data : "Cant be friends with yourself!"});
+          }
           alreadyfriend(res, val.user, (result.rows[0]).userid);
           
         }
         else{
           res.send({res : 2, data : "username does not exist"});
         }
-        
       }
-     
     })
   });
 
