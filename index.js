@@ -71,7 +71,7 @@ var login = express()
     // access database using uid
 
   });
-
+var fr = 9;
   function alreadyfriend(userid, friendid){
     var getUsersQuery = `SELECT * FROM chat where 
     (user1 = '` + userid + `' AND user2 = '` + friendid + `') 
@@ -80,14 +80,14 @@ var login = express()
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
-        return -1;
+        fr = -1;
       }
       else{
         if(result.rows.length > 0){
-          return 1;
+          fr = 1;
         }
         else{
-          return 0;
+          fr = 0;
         }
         
       }
@@ -108,9 +108,9 @@ var login = express()
       else{
         if(result.rows.length > 0){
           //res.send({test: "hi", res : val.user, data : });
-          var ans = 5;
-          ans = alreadyfriend(val.user, (result.rows[0]).userid);
-          res.send({res: ans});
+          
+          alreadyfriend(val.user, (result.rows[0]).userid);
+          res.send({res: fr});
         }
         else{
           res.send({res : 2, data : "username does not exist"});
