@@ -179,6 +179,23 @@ var login = express()
     })
   });
 
+  login.get('/getmess/:val', (req, res) => {
+    var val = req.params.val;
+    var val = JSON.parse(val);
+
+    var getUsersQuery = `SELECT * from message where chatid = `+ val.chat + ` order by messageid DESC limit ` + val.num;                                         
+
+    pool.query(getUsersQuery, (error, result) => {
+      if(error){
+        res.send({res : -1, data : error});
+      }
+      else{
+        res.send({res : 0, data : result.rows});
+
+      }
+    })
+  });
+
   //socket.io
 
   io.of("/io/").on('connection', (socket) => {

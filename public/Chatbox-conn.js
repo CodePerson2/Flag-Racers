@@ -88,13 +88,14 @@ function insertfriends(values){
 function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
+    getchat(chatid);
 
 }
 function sendchat(chatid){
     var xhttp;
     var loc = '/sendmess/';
     
-    val = {"chat": chatid, "message": text.innerText, "user": userid};
+    val = {"chat": chatid, "message": text.value, "user": userid};
     val = JSON.stringify(val);
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -106,6 +107,24 @@ function sendchat(chatid){
       }
     }
     xhttp.open("POST", loc+val, true);
+    xhttp.send();
+}
+function getchat(chatid, num){
+    var xhttp;
+    var loc = '/getmess/';
+    
+    val = {"chat": chatid, "num": num};
+    val = JSON.stringify(val);
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+            
+            var res = JSON.parse(this.responseText);
+            console.log(res);
+            
+      }
+    }
+    xhttp.open("GET", loc+val, true);
     xhttp.send();
 }
 
