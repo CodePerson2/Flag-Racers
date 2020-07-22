@@ -86,7 +86,7 @@ var login = express()
       }
       else{
         if(result.rows.length > 0){
-          alreadyfriend(val.userid, result.rows);
+          alreadyfriend(val.userid, result.rows.length);
         }
         else{
           res.send({res : 2, data : "username does not exist"});
@@ -98,6 +98,7 @@ var login = express()
     // access database using uid
 
   });
+
   function alreadyfriend(userid, friendid){
     res.send({res : 3, data : "here"});
   }
