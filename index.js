@@ -72,26 +72,39 @@ var login = express()
 
   });
 
+  function addfriend(res, userid, friendid){
+    var userQuery = `INSERT INTO chat(user1, user2) VALUES('`+ userid +`', '`+ friendid +`')`;
 
-  var fr = 9;
+    pool.query(UsersQuery, (error, result) => {
+      if(error){
+        res.send({res : -1, data : error});
+      }
+      else{
+        res.send({res : 0, data : "chat made!"});
+        
+      }
+    })
+  }
+
+
   function alreadyfriend(res, userid, friendid){
     var UsersQuery = `SELECT * FROM chat where (user1 = '` + userid + `' AND user2 = '` + friendid + `') OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
                                                  
-    fr = 8;
     pool.query(UsersQuery, (error, result) => {
       if(error){
-        fr = -1;
+        res.send({res : -1, data : error});
       }
       else{
         if(result.rows.length > 0){
-          fr = 1;
+          res.send({res : 3, data : "already friends"});
+          
         }
         else{
-          fr = 0;
+          addfriend(res, userid, friendid);
         }
         
       }
-      res.send({res: fr});
+      
     })
   }
 
@@ -104,7 +117,7 @@ var login = express()
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
-        res.send({res : 1, data : error});
+        res.send({res : -1, data : error});
       }
       else{
         if(result.rows.length > 0){
