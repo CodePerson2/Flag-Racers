@@ -63,7 +63,7 @@ function insertfriends(values){
     for(var i = 0; i < values.length; i++){
         var friendname;
         var friendid;
-        var  chatid = values[i].name2;
+        var  chatid = values[i].chatid;
         if(userid == values[i].user1){
             friendid = values[i].user2;
             friendname = values[i].name2;
