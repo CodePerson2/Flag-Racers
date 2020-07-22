@@ -169,6 +169,5 @@ var login = express()
     });
   });
 
-  http.listen(PORT, console.log("here"));
 
-  login.listen(PORT, console.log("here"))
+  login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
