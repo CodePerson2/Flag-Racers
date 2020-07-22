@@ -41,7 +41,7 @@ function getfriends(){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            
+            insertfriends(res.data);
       }
     }
     xhttp.open("GET", loc+val, true);
