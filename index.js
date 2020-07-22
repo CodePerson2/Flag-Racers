@@ -2,8 +2,8 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
-var http = require('http').createServer(express);
-var io = require('socket.io').listen(http);
+var http = require('http').Server(express);
+var io = require('socket.io')(http);
 
 const { Pool } = require('pg');
 var pool;
@@ -169,5 +169,6 @@ var login = express()
     });
   });
 
+  http.listen(PORT);
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
