@@ -77,7 +77,7 @@ var login = express()
     var val = JSON.parse(val);
     //res.send(signin);                       //signin data
 
-    var getUsersQuery = `SELECT * FROM login`;
+    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `'`;
                                                  
 
     pool.query(getUsersQuery, (error, result) => {
