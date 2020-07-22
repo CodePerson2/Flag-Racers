@@ -48,4 +48,32 @@ function getfriends(){
     xhttp.send();
 }
 
+function insertfriends(values){
+    for(var i = 0; i < values.length; i++){
+        var friendname;
+        var friendid;
+        if(userid == values[i].user1){
+            friendid = values[i].user2;
+            friendname = values[i].name2;
+        }
+        else{
+            friendid = values[i].user1;
+            friendname = values[i].name1;
+        }
+        var item = document.createElement("li");
+        var nm = document.createElement("span");
+
+        nm.classList.add("groupName");
+        nm.innerText = friendname;
+        item.innerHTML = nm;
+        item.setAttribute("onclick", "openchat(" + friendid + ", " + friendname + ")");
+        document.getElementById("chatlist").append(item);
+
+    }
+
+}
+function openchat(id, name){
+    alert("hi")
+}
+
 getfriends();
