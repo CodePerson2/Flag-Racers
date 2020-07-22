@@ -163,7 +163,7 @@ var login = express()
 
   //socket.io
 
-  io.on('connection', (socket) => {
+  io.of("/io").on('connection', (socket) => {
     socket.on('chat message', (msg) => {
       console.log('message: ' + msg);
     });
