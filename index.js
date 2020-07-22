@@ -77,7 +77,7 @@ var login = express()
   function alreadyfriend(res, userid, friendid){
     var UsersQuery = `SELECT * FROM chat where (user1 = '` + userid + `' AND user2 = '` + friendid + `') OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
                                                  
-    res = 8;
+    fr = 8;
     pool.query(UsersQuery, (error, result) => {
       if(error){
         fr = -1;
