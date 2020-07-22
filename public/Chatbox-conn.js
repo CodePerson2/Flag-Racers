@@ -68,13 +68,13 @@ function insertfriends(values){
         item.appendChild(nm);
         item.setAttribute("onclick", "openchat(" + friendid + ", '" + friendname + "')");
         document.getElementById("chatlist").append(item);
-        document.getElementById("chatname").innerText = friendname;
+        
 
     }
 
 }
 function openchat(id, name){
-    alert("hi")
+    document.getElementById("chatname").innerText = name;
 }
 
 getfriends();
