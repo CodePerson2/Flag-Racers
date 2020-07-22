@@ -1,7 +1,8 @@
 var userid = 1;
 var input = document.getElementById("inp");     //id of input of search bar
 var socket = io();  //socket
-io.connect("/io/");
+socket.connect("/io/");
+socket.emit('chat message', "hi");
 
 input.addEventListener("keyup", function(e){
 

@@ -3,7 +3,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 
 var http = require('http').createServer(express);
-var io = require('socket.io')(http);
+var io = require('socket.io').listen(http);
 
 const { Pool } = require('pg');
 var pool;
@@ -163,10 +163,11 @@ var login = express()
 
   //socket.io
 
-  io.of("/io").on('connection', (socket) => {
+  io.of("/io/").on('connection', (socket) => {
     socket.on('chat message', (msg) => {
       console.log('message: ' + msg);
     });
   });
+
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
