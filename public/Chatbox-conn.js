@@ -5,12 +5,12 @@ var io = io('socket.io');
 var socket = io.connect("/io/", {
     reconnection: true
 });
-*/
+
 socket.on('socketClientID', function (socketClientID) {
     console.log('Connection to server established. SocketID is',socketClientID);
     socket.emit('hello_from_client', 123);
 });
-
+*/
 
 input.addEventListener("keyup", function(e){
 
@@ -63,6 +63,7 @@ function insertfriends(values){
     for(var i = 0; i < values.length; i++){
         var friendname;
         var friendid;
+        var  chatid = values[i].name2;
         if(userid == values[i].user1){
             friendid = values[i].user2;
             friendname = values[i].name2;
@@ -77,20 +78,36 @@ function insertfriends(values){
         nm.classList.add("groupName");
         nm.innerText = friendname;
         item.appendChild(nm);
-        item.setAttribute("onclick", "openchat(" + friendid + ", '" + friendname + "')");
+        item.setAttribute("onclick", "openchat(" + friendid + ", '" + friendname + "', " + chatid + ")");
         document.getElementById("chatlist").append(item);
         
 
     }
 
 }
-function openchat(id, name){
+function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
+    document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
+
 }
-function sendchat(){
+function sendchat(chatid){
+    var xhttp;
+    var loc = '/sendmess/';
     
+    val = {"chat": chatid, "message": text.value, "user": userid};
+    val = JSON.stringify(val);
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+            
+            var res = JSON.parse(this.responseText);
+            console.log(res);
+            insertfriends(res.data);
+      }
+    }
+    xhttp.open("POST", loc+val, true);
+    xhttp.send();
 }
 
-form.addEventListener("submit", sendchat());
 
 getfriends();

@@ -162,6 +162,23 @@ var login = express()
     })
   });
 
+  login.get('/getmess/:val', (req, res) => {
+    var val = req.params.val;
+    var val = JSON.parse(val);
+
+    var getUsersQuery = `INSERT INTO message(userid, message, chatid) VALUES(`+ val.user +`, '`+ val.message +`', `+ val.chat + `)`;                                         
+
+    pool.query(getUsersQuery, (error, result) => {
+      if(error){
+        res.send({res : -1, data : error});
+      }
+      else{
+        res.send({res : 0, data : "sent successfully"});
+
+      }
+    })
+  });
+
   //socket.io
 
   io.of("/io/").on('connection', (socket) => {
