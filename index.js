@@ -86,7 +86,7 @@ var login = express()
       }
       else{
         if(result.rows.length > 0){
-          res.send({res : val.userid, data : result.fields[0].userid});
+          res.send({test: "hi", res : val.user, data : result.fields[0].userID});
           //alreadyfriend(res, val.userid, result.fields[0].userid);
         }
         else{
