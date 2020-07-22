@@ -1,6 +1,6 @@
 var userid = 1;
 var input = document.getElementById("inp");     //id of input of search bar
-var io = io();
+var io = io('socket.io');
 var socket = io.connect("/io/", {
     reconnection: true
 });
