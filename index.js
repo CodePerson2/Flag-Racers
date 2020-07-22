@@ -74,7 +74,7 @@ var login = express()
 
 
   var fr = 9;
-  function alreadyfriend(userid, friendid){
+  function alreadyfriend(res, userid, friendid){
     var UsersQuery = `SELECT * FROM chat where (user1 = '` + userid + `' AND user2 = '` + friendid + `') OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
                                                  
     res = 8;
@@ -91,6 +91,7 @@ var login = express()
         }
         
       }
+      res.send({res: fr});
     })
   }
 
@@ -109,8 +110,8 @@ var login = express()
         if(result.rows.length > 0){
           //res.send({test: "hi", res : val.user, data : });
           
-          alreadyfriend(val.user, (result.rows[0]).userid);
-          res.send({res: fr});
+          alreadyfriend(res, val.user, (result.rows[0]).userid);
+          
         }
         else{
           res.send({res : 2, data : "username does not exist"});
