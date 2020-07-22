@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
+//socket.io
 var http = require('http').Server(express);
 var io = require('socket.io')(http);
 
@@ -169,6 +170,5 @@ var login = express()
     });
   });
 
-  http.listen(PORT);
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
