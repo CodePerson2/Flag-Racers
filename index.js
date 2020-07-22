@@ -72,8 +72,8 @@ var login = express()
 
   });
 
-  function addfriend(res, userid, friendid){
-    var UserQuery = `INSERT INTO chat(user1, user2) VALUES('`+ userid +`', '`+ friendid +`')`;
+  function addfriend(res, userid, friendid, username, friendname){
+    var UserQuery = `INSERT INTO chat(user1, user2, name1, name2) VALUES('`+ userid +`', '`+ friendid +`', '`+ username +`', '`+ friendname +`')`;
 
     pool.query(UserQuery, (error, result) => {
       if(error){
@@ -86,7 +86,7 @@ var login = express()
   }
 
 
-  function alreadyfriend(res, userid, friendid){
+  function alreadyfriend(res, userid, friendid, username, friendname){
     var UsersQuery = `SELECT * FROM chat where (user1 = '` + userid + `' AND user2 = '` + friendid + `') OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
                                                  
     pool.query(UsersQuery, (error, result) => {
@@ -99,7 +99,7 @@ var login = express()
           
         }
         else{
-          addfriend(res, userid, friendid);
+          addfriend(res, userid, friendid, username, friendname);
         }  
       }
     })
@@ -108,20 +108,30 @@ var login = express()
   login.post('/addfriend/:val', (req, res) => {
     var val = req.params.val;
     var val = JSON.parse(val);
+    var user;
+    var friend;
 
-    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `'`;                                         
+    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `' or userID = '`+ val.user +`'`;                                         
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
         res.send({res : -1, data : error});
       }
       else{
-        if(result.rows.length > 0){
-          if(val.user == (result.rows[0]).userid){
+        if(result.rows.length > 1){
+          if(result.rows[0].userid == val.userid){
+            user = result.rows[0];
+            friend = result.rows[1];
+          }
+          else{
+            user = result.rows[1];
+            friend = result.rows[0];
+          }
+          if(val.user == friend.userid){
             res.send({res : 2, data : "Cant be friends with yourself!"});
             return;
           }
-          alreadyfriend(res, val.user, (result.rows[0]).userid);
+          alreadyfriend(res, val.user, (result.rows[0]).userid, user.username, (result.rows[0]).username);
           
         }
         else{

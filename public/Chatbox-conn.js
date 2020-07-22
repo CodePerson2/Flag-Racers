@@ -41,8 +41,6 @@ function getfriends(){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            alert(res.data);
-            
             
       }
     }
