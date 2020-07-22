@@ -88,7 +88,7 @@ function insertfriends(values){
 function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
-    getchat(chatid);
+    getchat(chatid, 1);
 
 }
 function sendchat(chatid){
