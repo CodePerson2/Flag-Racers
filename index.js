@@ -130,6 +130,22 @@ var login = express()
     })
   });
 
+  login.get('/getfriend/:val', (req, res) => {
+    var val = req.params.val;
+    var val = JSON.parse(val);
+
+    var getUsersQuery = `SELECT * FROM chat where user1 = '` + val.user + `' or user2 = '`+ val.user +`'`;                                         
+
+    pool.query(getUsersQuery, (error, result) => {
+      if(error){
+        res.send({res : -1, data : error});
+      }
+      else{
+        res.send({res : 0, data : result.rows});
+
+      }
+    })
+  });
 
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
