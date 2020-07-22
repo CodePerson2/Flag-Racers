@@ -94,7 +94,7 @@ function sendchat(chatid){
     var xhttp;
     var loc = '/sendmess/';
     
-    val = {"chat": chatid, "message": text.value, "user": userid};
+    val = {"chat": chatid, "message": text.innerText, "user": userid};
     val = JSON.stringify(val);
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -102,7 +102,7 @@ function sendchat(chatid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            insertfriends(res.data);
+            
       }
     }
     xhttp.open("POST", loc+val, true);
