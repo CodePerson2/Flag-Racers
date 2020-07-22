@@ -111,7 +111,7 @@ var login = express()
     var user;
     var friend;
 
-    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `' or userID = '`+ val.user +`'`;                                         
+    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `' or userID = `+ val.user;                                         
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
