@@ -88,7 +88,7 @@ var login = express()
         if(result.rows.length > 0){
           //res.send({test: "hi", res : val.user, data : });
           var ans = alreadyfriend(val.user, (result.rows[0]).userid);
-          res.send({res : ans);
+          res.send({res : ans});
         }
         else{
           res.send({res : 2, data : "username does not exist"});
