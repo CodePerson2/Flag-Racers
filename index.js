@@ -89,7 +89,7 @@ var login = express()
           res.send({res : 0, data : 'success'});
         }
         else{
-          res.send({res : 0, data : 'fail'});
+          res.send({res : 0, data : result.rows});
         }
         
       }
