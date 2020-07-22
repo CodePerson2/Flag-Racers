@@ -162,7 +162,7 @@ var login = express()
     })
   });
 
-  login.get('/getmess/:val', (req, res) => {
+  login.post('/getmess/:val', (req, res) => {
     var val = req.params.val;
     var val = JSON.parse(val);
 
