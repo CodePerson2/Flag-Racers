@@ -1,5 +1,8 @@
 var userid = 1;
 var input = document.getElementById("inp");     //id of input of search bar
+var socket = io();  //socket
+const form = document.querySelector(".form");
+const text = document.querySelector("#text");
 
 input.addEventListener("keyup", function(e){
 
@@ -76,5 +79,10 @@ function insertfriends(values){
 function openchat(id, name){
     document.getElementById("chatname").innerText = name;
 }
+function sendchat(){
+    alert("hi");
+}
+
+form.addEventListener("submit", sendchat());
 
 getfriends();
