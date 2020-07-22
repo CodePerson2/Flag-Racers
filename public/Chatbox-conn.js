@@ -1,10 +1,11 @@
 var userid = 1;
 var input = document.getElementById("inp");     //id of input of search bar
+/*
 var io = io('socket.io');
 var socket = io.connect("/io/", {
     reconnection: true
 });
-
+*/
 socket.on('socketClientID', function (socketClientID) {
     console.log('Connection to server established. SocketID is',socketClientID);
     socket.emit('hello_from_client', 123);
@@ -87,7 +88,7 @@ function openchat(id, name){
     document.getElementById("chatname").innerText = name;
 }
 function sendchat(){
-    socket.emit('chat message', "hi");
+    
 }
 
 form.addEventListener("submit", sendchat());
