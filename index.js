@@ -73,9 +73,9 @@ var login = express()
   });
 
   function addfriend(res, userid, friendid){
-    var userQuery = `INSERT INTO chat(user1, user2) VALUES('`+ userid +`', '`+ friendid +`')`;
+    var UserQuery = `INSERT INTO chat(user1, user2) VALUES('`+ userid +`', '`+ friendid +`')`;
 
-    pool.query(UsersQuery, (error, result) => {
+    pool.query(UserQuery, (error, result) => {
       if(error){
         res.send({res : -1, data : error});
       }
