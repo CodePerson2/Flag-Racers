@@ -86,10 +86,10 @@ var login = express()
       }
       else{
         if(result.rows.length > 0){
-          res.send({res : 0, data : 'success'});
+          alreadyfriend(val.userid, result.rows[0].userid);
         }
         else{
-          res.send({res : 0, data : result.rows});
+          res.send({res : 2, data : "username does not exist"});
         }
         
       }
@@ -98,5 +98,8 @@ var login = express()
     // access database using uid
 
   });
+  function alreadyfriend(userid, friendid){
+    res.send({res : 3, data : "here"});
+  }
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
