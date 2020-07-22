@@ -3,7 +3,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 
 var http = require('http').createServer(express);
-var io = require('socket.io')(http);
+var io = require('socket.io').listen(http);
 
 const { Pool } = require('pg');
 var pool;
@@ -24,10 +24,6 @@ var login = express()
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
     var admin = 0;
-
-    //var getUsersQuery = `SELECT * FROM login where username = '` + signin.name +`'`;
-
-
 
     if(signup.adminCheck == true){
       admin = 1;
@@ -173,8 +169,6 @@ var login = express()
     });
   });
 
-  http.listen(PORT, () => {
-    console.log('listening on *:3000');
-  });
+  http.listen(express.get('port'));
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
