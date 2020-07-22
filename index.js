@@ -85,7 +85,8 @@ var login = express()
         res.send({res : 1, data : error});
       }
       else{
-        if(results.rows.length > 0){
+        var rows = JSON.parse(results.rows);
+        if(rows.length > 0){
           res.send({res : 0, data : 'success'});
         }
         else{
