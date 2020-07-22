@@ -1,6 +1,6 @@
 var userid = 1;
 var input = document.getElementById("inp");     //id of input of search bar
-var io = require('socket.io-client');
+var io = require('https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js');
 var socket = io.connect("/io/", {
     reconnection: true
 });
