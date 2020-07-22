@@ -165,5 +165,16 @@ var login = express()
     })
   });
 
+  //socket.io
+  http.listen(process.env.PORT, () => {
+    console.log('listening on *:3000');
+  });
+
+  io.on('connection', (socket) => {
+    socket.on('chat message', (msg) => {
+      console.log('message: ' + msg);
+    });
+  });
+
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
