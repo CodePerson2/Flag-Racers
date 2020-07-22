@@ -119,6 +119,7 @@ var login = express()
         if(result.rows.length > 0){
           if(val.user == (result.rows[0]).userid){
             res.send({res : 2, data : "Cant be friends with yourself!"});
+            return;
           }
           alreadyfriend(res, val.user, (result.rows[0]).userid);
           

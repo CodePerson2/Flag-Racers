@@ -1,6 +1,5 @@
 var userid = 1;
 var input = document.getElementById("inp");     //id of input of search bar
-console.log(input);
 
 input.addEventListener("keyup", function(e){
 
