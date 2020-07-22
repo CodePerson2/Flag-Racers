@@ -78,7 +78,7 @@ function openchat(id, name){
     document.getElementById("chatname").innerText = name;
 }
 function sendchat(){
-    alert("hi");
+    socket.emit('chat message', "hi");
 }
 
 form.addEventListener("submit", sendchat());
