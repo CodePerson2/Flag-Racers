@@ -71,14 +71,14 @@ var login = express()
     // access database using uid
 
   });
-var fr = 9;
+
+
+  var fr = 9;
   function alreadyfriend(userid, friendid){
-    var getUsersQuery = `SELECT * FROM chat where 
-    (user1 = '` + userid + `' AND user2 = '` + friendid + `') 
-    OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
+    var UsersQuery = `SELECT * FROM chat where (user1 = '` + userid + `' AND user2 = '` + friendid + `') OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
                                                  
 
-    pool.query(getUsersQuery, (error, result) => {
+    pool.query(UsersQuery, (error, result) => {
       if(error){
         fr = -1;
       }
