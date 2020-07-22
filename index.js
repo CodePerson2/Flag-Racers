@@ -85,7 +85,13 @@ var login = express()
         res.send({res : 1, data : error});
       }
       else{
-        res.send({res : 0, data : result.rows});
+        if(results.rows.length > 0){
+          res.send({res : 0, data : 'success'});
+        }
+        else{
+          res.send({res : 0, data : 'fail'});
+        }
+        
       }
      
     })
