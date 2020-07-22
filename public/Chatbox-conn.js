@@ -14,7 +14,7 @@ function addFriend(friend){
     var loc = '/addfriend/';
     
     val = {"user": userid, "friend": friend};
-
+    console.log(friend);
     val = JSON.stringify(val);
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
