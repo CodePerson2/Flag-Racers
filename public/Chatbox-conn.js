@@ -51,4 +51,4 @@ function getfriends(){
     xhttp.send();
 }
 
-document.onload(getfriends());
+getfriends();
