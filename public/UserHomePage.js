@@ -18,3 +18,11 @@ function chat() {
   window.location = "Chatbox.html?" + urlParams;
   //location.href="Chatbox.html"
 }
+
+/*
+ Logout function from flag.js
+*/
+function logout(){
+  document.cookie = "user credentials=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  window.location.replace("Login.html");
+}
