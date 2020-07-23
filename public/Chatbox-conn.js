@@ -96,7 +96,7 @@ function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
     messid = 0;
-    getchat(chatid, 4);
+    var getmessages = setInterval(getchat(chatid, 4), 3000);
 
 }
 function sendchat(chatid){
@@ -128,8 +128,8 @@ function getchat(chatid, num){
       if (this.readyState == 4 && this.status == 200) {
             
             var res = JSON.parse(this.responseText);
-            console.log(res);
-            console.log((res.data.length - 1));
+            //console.log(res);
+            //console.log((res.data.length - 1));
             if(res.res == -1){
                 console.log("fail");
                 return;
@@ -149,6 +149,8 @@ function getchat(chatid, num){
     xhttp.open("GET", loc+val, true);
     xhttp.send();
 }
+
+
 
 urlid();
 getfriends();
