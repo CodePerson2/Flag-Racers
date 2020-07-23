@@ -117,7 +117,7 @@ function sendchat(chatid){
     xhttp.open("POST", loc+val, true);
     xhttp.send();
 }
-function getchat(chatid, num, messid){
+function getchat(chatid, num, messid, userid){
     var xhttp;
     var loc = '/getmess/';
     
