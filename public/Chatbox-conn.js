@@ -1,4 +1,4 @@
-var userid = 1;
+var userid;
 var input = document.getElementById("inp");     //id of input of search bar
 /*
 var io = io('socket.io');
@@ -11,6 +11,11 @@ socket.on('socketClientID', function (socketClientID) {
     socket.emit('hello_from_client', 123);
 });
 */
+function urlid(){
+    var val = window.location.href.split('?');
+    val = val[1].split('=');
+    alert(val[0]);
+}
 
 input.addEventListener("keyup", function(e){
 
@@ -128,5 +133,5 @@ function getchat(chatid, num){
     xhttp.send();
 }
 
-
+urlid();
 getfriends();
