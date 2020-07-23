@@ -111,13 +111,13 @@ function sendchat(chatid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            getchat(chatid, 5, messid, userid);
+            getchat(chatid, 5);
       }
     }
     xhttp.open("POST", loc+val, true);
     xhttp.send();
 }
-function getchat(chatid, num, messid, userid){
+function getchat(chatid, num){
     var xhttp;
     var loc = '/getmess/';
     
@@ -128,7 +128,7 @@ function getchat(chatid, num, messid, userid){
       if (this.readyState == 4 && this.status == 200) {
             
             var res = JSON.parse(this.responseText);
-            console.log(res);
+            //console.log(res);
             for(var i = res.data.length -1; i >= 0; i--){
                 if(res.data[i].userid == userid){
                     message(res.data[i].message);
