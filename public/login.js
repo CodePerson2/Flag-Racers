@@ -53,7 +53,8 @@ function send(type) {
                     alert("wrong password/username");
                 }
                 else if(res.data[0].username != ''){
-                    var url = "UserHomePage.html?" + res.data[0].userid;
+                    //var url = "UserHomePage.html?" + res.data[0].userid;
+                    var url = "UserHomePage.html?" + name;
                     window.location.replace(url);
 
                 }
