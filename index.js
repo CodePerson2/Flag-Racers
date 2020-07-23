@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const cookieParser = require('cookie-parser') //making login cookie
 const PORT = process.env.PORT || 5000
 
 //socket.io
@@ -38,11 +39,15 @@ var login = express()
         res.send({res : 1, data : error});
       }
       else{
+
+        //Setting up a cookie to track logins
+        res.cookie("user credentials", signup.name);
+
         var results = {'rows': result.rows}
         res.send({res : 0, data : JSON.stringify('success')});
-      }  
+      }
 
-      
+
     })
     // access database using uid
 
@@ -62,6 +67,10 @@ var login = express()
       }
 
       else{
+
+        //Setting up a cookie to track logins
+        res.cookie("user credentials", signin.name);
+
         res.send({res : 0, data : result.rows});
       }
       if(signin.admin ===1){
@@ -88,7 +97,7 @@ var login = express()
 
   function alreadyfriend(res, userid, friendid, username, friendname){
     var UsersQuery = `SELECT * FROM chat where (user1 = '` + userid + `' AND user2 = '` + friendid + `') OR (user1 = '` + friendid + `' AND user2 = '` + userid + `')`;
-                                                 
+
     pool.query(UsersQuery, (error, result) => {
       if(error){
         res.send({res : -1, data : error});
@@ -96,11 +105,11 @@ var login = express()
       else{
         if(result.rows.length > 0){
           res.send({res : 3, data : "already friends"});
-          
+
         }
         else{
           addfriend(res, userid, friendid, username, friendname);
-        }  
+        }
       }
     })
   }
@@ -111,7 +120,7 @@ var login = express()
     var user;
     var friend;
 
-    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `' or userID = `+ val.user;                                         
+    var getUsersQuery = `SELECT * FROM login where username = '` + val.friend + `' or userID = `+ val.user;
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
@@ -127,9 +136,9 @@ var login = express()
             user = result.rows[1];
             friend = result.rows[0];
           }
-          
+
           alreadyfriend(res, user.userid, friend.userid, user.username, friend.username);
-          
+
         }
         else if(result.rows.length > 0){
           if(val.user == result.rows[0].userid){
@@ -149,7 +158,7 @@ var login = express()
     var val = req.params.val;
     var val = JSON.parse(val);
 
-    var getUsersQuery = `SELECT * FROM chat where user1 = '` + val.user + `' or user2 = '`+ val.user +`'`;                                         
+    var getUsersQuery = `SELECT * FROM chat where user1 = '` + val.user + `' or user2 = '`+ val.user +`'`;
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
@@ -166,7 +175,7 @@ var login = express()
     var val = req.params.val;
     var val = JSON.parse(val);
 
-    var getUsersQuery = `INSERT INTO message(userid, message, chatid) VALUES(`+ val.user +`, '`+ val.message +`', `+ val.chat + `)`;                                         
+    var getUsersQuery = `INSERT INTO message(userid, message, chatid) VALUES(`+ val.user +`, '`+ val.message +`', `+ val.chat + `)`;
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
@@ -183,7 +192,7 @@ var login = express()
     var val = req.params.val;
     var val = JSON.parse(val);
 
-    var getUsersQuery = `SELECT * from message where chatid = `+ val.chat + ` AND messageid > `+ val.messid +` order by messageid DESC limit ` + val.num;                                         
+    var getUsersQuery = `SELECT * from message where chatid = `+ val.chat + ` AND messageid > `+ val.messid +` order by messageid DESC limit ` + val.num;
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){

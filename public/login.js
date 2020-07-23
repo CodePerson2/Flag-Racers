@@ -71,3 +71,31 @@ function send(type) {
     xhttp.open(type, loc+signin, true);
     xhttp.send();
 }
+
+
+// Cookie function that returns value of cookie name
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+// Redirects user back to the flag selection page
+window.onload = function checkCookie() {
+  var user=getCookie("user credentials")
+  //alert("You are still logged in, " + checkingCookie);
+  if (user != ""){
+    var url = "flag.html?" + user;
+    window.location.replace(url);
+  }
+}
