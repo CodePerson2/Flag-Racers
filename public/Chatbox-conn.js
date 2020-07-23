@@ -14,7 +14,7 @@ socket.on('socketClientID', function (socketClientID) {
 function urlid(){
     var val = window.location.href.split('?');
     val = val[1].split('=');
-    alert(val[0]);
+    userid = val[0];
 }
 
 input.addEventListener("keyup", function(e){
