@@ -1,5 +1,6 @@
 var messid = 0;
 var userid = -1;
+var searchMessage;
 var input = document.getElementById("inp");     //id of input of search bar
 /*
 var io = io('socket.io');
@@ -96,6 +97,7 @@ function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
     messid = 0;
+    clearInterval(searchMessage);
     
     searchMessage = setInterval(function() {    //recieves all messages for chats
         getchat(chatid, 4);
