@@ -99,6 +99,9 @@ function openchat(id, name, chatid){
     messid = 0;
     chatid = chatid;
     
+    searchMessage = setInterval(function() {
+        getchat(chatid, 4);
+      }, 2000);
 
 }
 function sendchat(chatid){
@@ -152,7 +155,7 @@ function getchat(chatid, num){
     xhttp.send();
 }
 
-var getmessages = setInterval(getchat(chatid, 4), 3000);
+
 
 urlid();
 getfriends();
