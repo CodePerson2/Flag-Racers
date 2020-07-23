@@ -91,6 +91,7 @@ function insertfriends(values){
 
 }
 function openchat(id, name, chatid){
+    document.getElementById("messbody").innerHTML = "";
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
     getchat(chatid, 2, 0);
@@ -131,7 +132,7 @@ function getchat(chatid, num, messid){
                     message(res.data[i].message);
                 }
                 else{
-                    message(res.data[i].message);
+                    reply(res.data[i].message);
                 }
             }
             
