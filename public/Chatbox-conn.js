@@ -120,7 +120,7 @@ function sendchat(chatid){
 function getchat(chatid, num){
     var xhttp;
     var loc = '/getmess/';
-    
+    console.log(chatid +' ' + num + ' ' + messid);
     val = {"chat": chatid, "num": num, "messid": messid};
     val = JSON.stringify(val);
     xhttp = new XMLHttpRequest();
@@ -130,6 +130,10 @@ function getchat(chatid, num){
             var res = JSON.parse(this.responseText);
             console.log(res);
             console.log((res.data.length - 1));
+            if(res.res == -1){
+                console.log("fail");
+                return;
+            }
             for(var i = (res.data.length - 1); i >= 0; i--){
                 if(res.data[i].userid == userid){
                     message(res.data[i].message);
