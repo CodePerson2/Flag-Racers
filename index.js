@@ -21,6 +21,7 @@ var login = express()
   login.set('views', path.join(__dirname, 'views'))
   login.set('view engine', 'ejs')
   login.get('/', (req, res) => res.render('pages/index'))
+  login.use(cookieParser())
 
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
