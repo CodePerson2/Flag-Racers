@@ -12,7 +12,7 @@ function setFlag(id){
 
 function getFlag(flagArr, index){
   console.log(flagArr.name);
-  
+
   var div = document.createElement('div');
   $(div).addClass('box');
   $(div).attr({style: 'content:URL(' + flagArr.flag + ')'});
@@ -20,7 +20,7 @@ function getFlag(flagArr, index){
   $(div).attr('onclick', 'setFlag(this.id)');
   $(div).prop('title', "Name: " + flagArr.name + '\n' + "Language: " + flagArr.languages[0].name + '\n' + "Pop: " + flagArr.population + '\n' + "Native Name: " + flagArr.nativeName + '\n' + "Capital: " + flagArr.capital + '\n' + "Subregion: " + flagArr.subregion + '\n' + "Currency: " + flagArr.currencies[0].name);
   $('#flag-cont').append(div);
-   
+
 }
 
 function allFlags(){
@@ -38,7 +38,7 @@ function allFlags(){
       }
       setFlag(42);
     }
-    
+
   };
   xhttp.open('GET', loc, true);
   xhttp.send();
@@ -46,5 +46,9 @@ function allFlags(){
 }
 function selectFlag(){
   var val = window.location.href.split('?');
-  window.location = "racetrack.html?" + val[1] + '?' +flagURL;
+  window.location = "racetrack.html?" + val[1] + '&url=' +flagURL;
+}
+function logout(){
+  document.cookie = "user credentials=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  window.location.replace("Login.html");
 }

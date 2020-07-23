@@ -20,6 +20,7 @@ $(function() {
     var restart_btn = $('.endButton');
     var score = $('#barFill');
     var finish = $('.finishLine');
+    var carFlag = $('#playerFlag');
 
     //saving location of racetrack and car dimensions
     var container_left = parseInt(container.css('left'));
@@ -114,6 +115,16 @@ $(function() {
     finish.css('visibility', 'hidden');
     // Begin looping of track and cars until game ends
     anim_id = requestAnimationFrame(repeat);
+
+    //Setting flag to player
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const page_type = urlParams.get('url');
+    console.log(page_type);
+    //carFlag.css('visibility', 'hidden');
+    carFlag.attr('src', page_type);
+    carFlag.css('max-width', '100%');
+    carFlag.css('max-height', '100%');
 
     function repeat() {
       // Test code on car collision causing game to end
