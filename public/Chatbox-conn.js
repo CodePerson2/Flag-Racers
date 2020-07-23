@@ -96,7 +96,7 @@ function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
     messid = 0;
-    getchat(chatid, 4, messid, userid);
+    getchat(chatid, 4);
 
 }
 function sendchat(chatid){
