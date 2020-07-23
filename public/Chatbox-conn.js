@@ -99,9 +99,9 @@ function openchat(id, name, chatid){
     messid = 0;
     chatid = chatid;
     
-    searchMessage = setInterval(function() {
+    searchMessage = setInterval(function() {    //recieves all messages for chats
         getchat(chatid, 4);
-      }, 2000);
+      }, 1000);
 
 }
 function sendchat(chatid){
@@ -116,7 +116,6 @@ function sendchat(chatid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            getchat(chatid, 5);
       }
     }
     xhttp.open("POST", loc+val, true);
