@@ -128,8 +128,9 @@ function getchat(chatid, num){
       if (this.readyState == 4 && this.status == 200) {
             
             var res = JSON.parse(this.responseText);
-            //console.log(res);
-            for(var i = res.data.length -1; i >= 0; i--){
+            console.log(res);
+            console.log((res.data.length - 1));
+            for(var i = (res.data.length - 1); i >= 0; i--){
                 if(res.data[i].userid == userid){
                     message(res.data[i].message);
                 }
