@@ -94,7 +94,8 @@ function openchat(id, name, chatid){
     document.getElementById("messbody").innerHTML = "";
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
-    getchat(chatid, 2, 0);
+    messid = 0;
+    getchat(chatid, 4, messid);
 
 }
 function sendchat(chatid){
@@ -127,7 +128,7 @@ function getchat(chatid, num, messid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            for(var i = 0; i < res.data.length; i++){
+            for(var i = res.data.length; i > 0; i--){
                 if(res.data[i].userid == userid){
                     message(res.data[i].message);
                 }
@@ -135,6 +136,7 @@ function getchat(chatid, num, messid){
                     reply(res.data[i].message);
                 }
             }
+            messid = res.data[0].messid;
             
       }
     }
