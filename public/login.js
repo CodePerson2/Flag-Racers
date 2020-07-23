@@ -13,13 +13,13 @@ function send(type) {
     var xhttp;
     var loc;
     var name, signin, password, password2, adminCheck;
-    
+
     if (type == "GET"){
         loc = '/signin/';
         name = document.getElementById("signinUser").value;
         password = document.getElementById("signinPass").value;
         signin = {name: name, password: password};
-        
+
     }
     else{
         loc = '/signup/';
@@ -34,14 +34,14 @@ function send(type) {
         }
     }
     console.log(loc);
-    
-    
+
+
 
     signin = JSON.stringify(signin);
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-            
+
             var res = JSON.parse(this.responseText);
             //console.log(res);
             if(res.res == 0){
@@ -65,8 +65,8 @@ function send(type) {
                 alert("username already exists");
             }
           }
-            
-            
+
+
       }
     xhttp.open(type, loc+signin, true);
     xhttp.send();
