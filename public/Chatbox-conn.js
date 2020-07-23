@@ -142,7 +142,7 @@ function getchat(chatid, num){
                     reply(res.data[i].message);
                 }
             }
-            messid = res.data[0].messid;
+            messid = res.data[0].messageid;
             
       }
     }
