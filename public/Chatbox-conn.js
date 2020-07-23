@@ -1,4 +1,4 @@
-var userid, messid;
+messid = 0;
 var input = document.getElementById("inp");     //id of input of search bar
 /*
 var io = io('socket.io');
