@@ -1,4 +1,4 @@
-var userid;
+var userid, messid;
 var input = document.getElementById("inp");     //id of input of search bar
 /*
 var io = io('socket.io');
@@ -108,7 +108,7 @@ function sendchat(chatid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            
+            getchat();
       }
     }
     xhttp.open("POST", loc+val, true);
@@ -126,6 +126,14 @@ function getchat(chatid, num, messid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
+            for(var i = 0; i < res.data.length; i++){
+                if(res.data[i].userid == userid){
+                    message(res.data[i].message);
+                }
+                else{
+                    message(res.data[i].message);
+                }
+            }
             
       }
     }
