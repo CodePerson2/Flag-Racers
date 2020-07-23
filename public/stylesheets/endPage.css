@@ -10,7 +10,7 @@
   text-align: center;
   width: 100%;
   height: 100%;
-  background-color: grey;
+  background-color: #daeced;
 }
 
 /*
@@ -30,8 +30,8 @@
 */
 .text {
   color: grey;
-  font-family: "Racing Sans One", Times, serif;
-  font-size: 50px;
+  font-family: "Racing Sans One", cursive;
+  font-size: 65px;
 }
 
 /*
