@@ -1,4 +1,5 @@
 messid = 0;
+userid = -1;
 var input = document.getElementById("inp");     //id of input of search bar
 /*
 var io = io('socket.io');
@@ -95,7 +96,7 @@ function openchat(id, name, chatid){
     document.getElementById("chatname").innerText = name;
     document.getElementById("sendbutton").setAttribute("onclick", "sendchat(" + chatid + ")")
     messid = 0;
-    getchat(chatid, 4, messid);
+    getchat(chatid, 4, messid, userid);
 
 }
 function sendchat(chatid){
@@ -110,7 +111,7 @@ function sendchat(chatid){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            getchat();
+            getchat(chatid, 5, messid, userid);
       }
     }
     xhttp.open("POST", loc+val, true);
