@@ -6,11 +6,17 @@ function race() {
   console.log(queryString);
   const urlParams = new URLSearchParams(queryString);
   const name = urlParams.get('name');
-
+  console.log(name);
   window.location = "flag.html?" + name;
   //location.href="flag.html";
 }
 
 function chat() {
-  location.href="Chatbox.html"
+  const  queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const name = urlParams.get('name');
+  console.log(name);
+  window.location = "Chatbox.html?" + name;
+  //location.href="Chatbox.html"
 }
