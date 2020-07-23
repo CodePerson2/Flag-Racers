@@ -183,7 +183,7 @@ var login = express()
     var val = req.params.val;
     var val = JSON.parse(val);
 
-    var getUsersQuery = `SELECT * from message where chatid = `+ val.chat + ` order by messageid DESC limit ` + val.num;                                         
+    var getUsersQuery = `SELECT * from message where chatid = `+ val.chat + ` AND messageid > `+ val.messid +` order by messageid DESC limit ` + val.num;                                         
 
     pool.query(getUsersQuery, (error, result) => {
       if(error){
