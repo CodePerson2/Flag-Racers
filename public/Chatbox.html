@@ -468,9 +468,10 @@ text.addEventListener("focus", () => {
   chatContainer.scrollTop = chatArea.scrollHeight + 560;
 });
 
-/*
+
 form.addEventListener("submit", e => {
   e.preventDefault();
+  /*
   msg = text.value;
   let li = document.createElement("li");
   li.innerHTML = msg;
@@ -481,13 +482,14 @@ form.addEventListener("submit", e => {
   text.value = "";
   // chatContainer.scrollTop =chatContainer.scrollHeight;
   text.focus();
-  //setTimeout(reply, 1000, messages[counter]);
+  setTimeout(reply, 1000, messages[counter]);
   counter++;
   if (counter == messages.length) {
     counter = 0;
   }
+  */
 });
-*/
+
 window.onload = ()=>{
   reply("Hey. Want to Race?")
 }
