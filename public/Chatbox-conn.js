@@ -130,7 +130,8 @@ function getchat(chatid, num, messid, userid){
             var res = JSON.parse(this.responseText);
             console.log(res);
             for(var i = res.data.length; i > 0; i--){
-                if((res.data[i]).userid == 10){
+                console.log(res.data[i]);
+                if(res.data[i].userid == userid){
                     message(res.data[i].message);
                 }
                 else{
