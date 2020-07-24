@@ -14,11 +14,11 @@
 }
 
 /*
-  Contains "Race finished" as well as the Restart & Reselect buttons
+  Contains the Restart & Reselect buttons
 */
 .end {
   position: absolute;
-  top: 25%;
+  top: 40%;
   left: 33%;
   text-align: center;
   height: 100px;
@@ -29,9 +29,11 @@
   "Race Finished" text
 */
 .text {
-  color: grey;
+  display: block;
+  text-align: center;
+  color: black;
   font-family: "Racing Sans One", cursive;
-  font-size: 65px;
+  font-size: 75px;
 }
 
 /*
@@ -153,4 +155,23 @@
   background-color: #FFFFFF;
   bottom: 0px;
   left: 87.5%;
+}
+/*
+  Logout button details
+*/
+.logOut {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.logOut:hover {
+  color: white;
+  background-color: green;
 }
