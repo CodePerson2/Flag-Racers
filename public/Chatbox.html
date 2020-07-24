@@ -296,6 +296,24 @@ textarea:focus,button:focus{
   background-color: #353A50;
   color: white;
 }
+#logOut{
+  display: block;
+  color: black;
+  left: 20%;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+#logOut:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#logOut.active {
+  background-color: #353A50;
+  color: white;
+}
 
 .topnav input[type=text] {
   float: right;
@@ -350,6 +368,7 @@ textarea:focus,button:focus{
 <div class="sidebar">
 <div class="topnav">
   <button onclick= "backPage()"><a href="file:///C:/Users/toshiba/Desktop/CMPT276/project/CMPT276/public/stylesheets/Chatbox.html">Back</a></button>
+  <button type="button" id="logOut" onclick="logout()">LOG OUT</button>
   <input id = "inp" type="text" placeholder="Search..">
 </div>
    <ul class="activeChats" id = "chatlist">
@@ -468,6 +487,11 @@ function backPage() {
   const urlParams = new URLSearchParams(queryString);
 
   window.location = "UserHomePage.html?" + urlParams;
+}
+
+function logout(){
+  document.cookie = "user credentials=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  window.location.replace("Login.html");
 }
 
 

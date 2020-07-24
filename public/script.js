@@ -207,11 +207,13 @@ $(function() {
 
     // Temporarily Game restarts upon hitting the End Button
     restart_btn.click(function() {
-          stop_the_game();
+        //location.reload();
+        //stop_the_game();
     });
 
     // Function to stop game when needed
     function stop_the_game() {
+        game_redirect();
         game_over = true;
         cancelAnimationFrame(anim_id);
         cancelAnimationFrame(move_right);
@@ -221,6 +223,16 @@ $(function() {
         restart_div.slideDown();
         restart_btn.focus();
         setHighScore();
+    }
+
+    //End game redirect
+    function game_redirect(){
+      console.log("redirection attempted!");
+      const  queryString = window.location.search;
+
+      const urlParams = new URLSearchParams(queryString);
+
+      window.location = "endPage.html?" + urlParams;
     }
 
     // Collision check with objects
