@@ -207,7 +207,7 @@ $(function() {
 
     // Temporarily Game restarts upon hitting the End Button
     restart_btn.click(function() {
-          //stop_the_game();
+          stop_the_game();
     });
 
     // Function to stop game when needed
