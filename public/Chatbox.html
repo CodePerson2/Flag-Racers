@@ -24,7 +24,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     width:100%;
     font-family: "Cairo";
   }
-  
+
   .screen-container{
     height:100%;
     background: #2A2E43;
@@ -35,7 +35,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     margin:10px auto;
     padding:10px;
   }
-  
+
   /* Header OR info bar */
 header{
   position:sticky;
@@ -247,7 +247,7 @@ footer{
 }
 .sendMess .attachment{
  border-radius:15px 0px 0px 15px;
- 
+
 }
 .sendMess .send{
   border-radius:0px 15px 15px 0px;
@@ -259,7 +259,7 @@ footer{
   margin-right:-4px;
   padding:5px;
   border:none;
-  
+
 }
 textarea:focus,button:focus{
   outline:none;
@@ -335,7 +335,7 @@ textarea:focus,button:focus{
            Switzerland
            <div class='status'></div>
           </span>
-         
+
         </div>
       </div>
       <div class="chat-options">
@@ -348,7 +348,7 @@ textarea:focus,button:focus{
 <div class="chat-screen">
 <div class="sidebar">
 <div class="topnav">
-  <button><a href="file:///C:/Users/toshiba/Desktop/CMPT276/project/CMPT276/public/stylesheets/Chatbox.html">Back</a></button>
+  <button onclick= "backPage()"><a href="file:///C:/Users/toshiba/Desktop/CMPT276/project/CMPT276/public/stylesheets/Chatbox.html">Back</a></button>
   <input id = "inp" type="text" placeholder="Search..">
 </div>
    <ul class="activeChats" id = "chatlist">
@@ -380,16 +380,16 @@ textarea:focus,button:focus{
            <span>China</span>
            <span>42</span>
        </li>
- </ul> 
-</div> 
+ </ul>
+</div>
 <!-- END OF SIDEBAR -->
  <div class="chat">
 <!-- BEGINING OF MESSAGE-->
  <div class="container fixed rev">
   <ul class="message-body" id="messbody">
-     
+
     </ul>
-   
+
 </div>
 <!-- END OF MESSAGE -->
 
@@ -412,7 +412,7 @@ textarea:focus,button:focus{
               </div>
             </footer>
 <!-- END OF INPUT BOTTOM-->
- </div> 
+ </div>
      </div>
     </div>
   </div>
@@ -420,7 +420,7 @@ textarea:focus,button:focus{
 </div>
 
 <script type="text/javascript">
-  
+
 const messages = [
   "Nice Race",
   "Flags are a lifestyle",
@@ -460,6 +460,13 @@ function message(msg){
   li.classList.add("chatbox-outgoing");
   chatArea.append(li);
   scroll();
+}
+function backPage() {
+  const  queryString = window.location.search;
+
+  const urlParams = new URLSearchParams(queryString);
+
+  window.location = "UserHomePage.html?" + urlParams;
 }
 
 
