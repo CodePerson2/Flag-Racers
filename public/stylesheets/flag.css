@@ -3,14 +3,29 @@ body{
   height: 100%;
   background: #daeced;
   font-family: 'Hind Vadodara', sans-serif;
-  
+
 }
 #title{
   display: block;
   text-align: center;
   font-size: 65px;
   font-family: 'Racing Sans One', cursive;
-  
+
+}
+#back {
+  width: 140px;
+  font-size: 20px;
+  border-radius: 15px;
+  padding: 5px;
+  position: absolute;
+  display: block;
+  left: 10px;
+  bottom: 10px;
+  background-color: white;
+}
+#back:hover{
+  background-color: steelblue;
+  cursor: pointer;
 }
 #select{
   width: 140px;

@@ -52,3 +52,11 @@ function logout(){
   document.cookie = "user credentials=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location.replace("Login.html");
 }
+
+function backHome() {
+  const  queryString = window.location.search;
+
+  const urlParams = new URLSearchParams(queryString);
+
+  window.location = "UserHomePage.html?" + urlParams;
+}
