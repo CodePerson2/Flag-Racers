@@ -2,11 +2,7 @@
   Sends user to 'race finished' page
 */
 function endGame() {
-  const  queryString = window.location.search;
-
-  const urlParams = new URLSearchParams(queryString);
-
-    window.location = "endPage.html?" + urlParams;
+    location.href= "endPage.html";
   }
 
   /*
@@ -24,11 +20,7 @@ function endGame() {
     Sends user to flag selection page
   */
   function selectFlag() {
-    const  queryString = window.location.search;
-
-    const urlParams = new URLSearchParams(queryString);
-
-      window.location = "flag.html?";
+    location.href= "flag.html"
   }
 
 /*
