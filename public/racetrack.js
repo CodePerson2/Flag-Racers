@@ -9,7 +9,11 @@ function endGame() {
     Sends user to racetrack page
   */
   function startGame() {
-    location.href= "racetrack.html";
+    const  queryString = window.location.search;
+
+    const urlParams = new URLSearchParams(queryString);
+
+      window.location = "racetrack.html?" + urlParams;
   }
 
   /*
