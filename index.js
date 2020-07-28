@@ -211,17 +211,20 @@ var login = express()
   });
   
   io.on('connection', function(socket) {
-    console.log('A user connected');
- 
-    //Send a message after a timeout of 4seconds
-    setTimeout(function() {
-       socket.send('Sent a message 4seconds after connection!');
-    }, 4000);
- 
-    socket.on('disconnect', function () {
-       console.log('A user disconnected');
+    socket.on('beep', function(){
+        socket.emit("beep", {data: 5});
+        console.log('beep recieved');
     });
- });
+
+    socket.on('change-speed', function(data) {
+        console.log('change speed recieved: ' + data);
+        socket.emit("speed", {newSpeed: data});
+    });
+
+    socket.on('ios-connection', function(data) {
+        console.log('ios connection with message: ' + data);
+    });
+  });
   
 
 
