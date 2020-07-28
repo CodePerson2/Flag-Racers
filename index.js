@@ -3,9 +3,6 @@ const path = require('path')
 const cookieParser = require('cookie-parser') //making login cookie
 const PORT = process.env.PORT || 5000
 
-//socket.io
-var http = require('http').Server(express);
-var io = require('socket.io')(http);
 
 const { Pool } = require('pg');
 var pool;
@@ -209,12 +206,21 @@ var login = express()
   });
 
   //socket.io
+  var http = require('http').Server(login);
+  var io = require('socket.io')(http);
 
-  io.of("/io/").on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-      console.log('message: ' + msg);
+  io.on('connection', function(socket) {
+    console.log('A user connected');
+ 
+    //Send a message after a timeout of 4seconds
+    setTimeout(function() {
+       socket.send('Sent a message 4seconds after connection!');
+    }, 1000);
+ 
+    socket.on('disconnect', function () {
+       console.log('A user disconnected');
     });
-  });
+ });
 
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
