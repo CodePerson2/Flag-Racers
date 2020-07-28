@@ -1,21 +1,30 @@
-var sock = require('express')();
-var http = require('http').Server(sock);
-const PORT = process.env.PORT || 3000
-var io = require('socket.io')(http);
+var express = require('express');
+var app = express();
+var expressWs = require('express-ws')(app);
+var path = require('path');
+
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    console.log('A user connected');
- 
-    //Send a message after a timeout of 4seconds
-    setTimeout(function() {
-       socket.send('Sent a message 4seconds after connection!');
-    }, 4000);
- 
-    socket.on('disconnect', function () {
-       console.log('A user disconnected');
+    socket.on('beep', function(){
+        socket.emit("speed", {data: 5});
+        console.log('beep recieved');
     });
- });
 
-http.listen(PORT, function() {
-   console.log('listening on *:3000');
+    socket.on('change-speed', function(data) {
+        console.log('change speed recieved: ' + data);
+        socket.emit("speed", {newSpeed: data});
+    });
+
+    socket.on('ios-connection', function(data) {
+        console.log('ios connection with message: ' + data);
+    });
+
+});
+
+app.set('port', (process.env.PORT || 5000));
+
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
 });
