@@ -213,16 +213,15 @@ var login = express()
   io.on('connection', function(socket) {
     console.log('A user connected');
  
-    //Send a message after a timeout of 4seconds
-    setTimeout(function() {
-      //Sending an object when emmiting an event
-      socket.emit('num', {description: io.sockets.clients()});
-   }, 4000);
-    
- 
-    socket.on('disconnect', function () {
-       console.log('A user disconnected');
-    });
+  //Send a message when 
+  setTimeout(function() {
+    //Sending an object when emmiting an event
+    socket.emit('testerEvent', { description: 'A custom event named testerEvent!'});
+  }, 4000);
+
+  socket.on('disconnect', function () {
+    console.log('A user disconnected');
+  });
  });
   
 
