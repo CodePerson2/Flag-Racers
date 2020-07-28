@@ -22,6 +22,32 @@ var login = express()
   login.get('/', (req, res) => res.render('pages/index'))
   login.use(cookieParser())
 
+  var server = login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+  var io = require('socket.io')(server);
+
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
+
+  io.on('connection', function(socket) {
+    socket.on('beep', function(){
+        socket.emit("beep", {data: 5});
+        console.log('beep recieved');
+    });
+
+    socket.on('change-speed', function(data) {
+        console.log('change speed recieved: ' + data);
+        socket.emit("speed", {newSpeed: data});
+    });
+
+    socket.on('ios-connection', function(data) {
+        console.log('ios connection with message: ' + data);
+    });
+  });
+
   login.post('/signup/:signupArray', (req, res) => {
     var signupArr = req.params.signupArray;
     var signup = JSON.parse(signupArr);
@@ -207,4 +233,4 @@ var login = express()
 
   
 
-  login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
