@@ -210,17 +210,19 @@ var login = express()
     })
   });
   
+  var num = 0;
   io.on('connection', function(socket) {
+    num++;
     console.log('A user connected');
     
-    var num = io.sockets.clients();
     //Send a message when 
     setTimeout(function() {
       //Sending an object when emmiting an event
-      socket.emit('testerEvent', { description: "number of clients " + num.length});
+      socket.emit('testerEvent', { description: "number of clients " + num});
     }, 4000);
 
     socket.on('disconnect', function () {
+      num--;
       console.log('A user disconnected');
     });
  });
