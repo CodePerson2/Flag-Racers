@@ -4,22 +4,6 @@
       <title>Hello world</title>
    </head>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script>
-    var socket = io.connect('/');
-    socket.on('speed', function (data) {
-        console.log('speed Message Received!');
-        console.log(data);    
-    });
-
-    socket.on('beep', function (data) {
-        console.log('beep Message Received!');    
-        console.log(data);    
-    });
-    socket.emit("beep", {beep : true});
-    socket.emit("change-speed", {"change-speed" : true});
-    socket.emit("ios-connection", {"ios-connection" : true});
-
-
-    </script>
+    <script> src="socket.js"</script>
    <body>Testing...</body>
 </html>
