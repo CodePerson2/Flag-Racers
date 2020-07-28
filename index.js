@@ -206,7 +206,7 @@ var login = express()
   });
 
   //socket.io
-  var http = require('http').Server(login);
+  var http = require('http').createServer(login);
   var io = require('socket.io')(http);
 
   io.on('connection', function(socket) {
@@ -221,6 +221,8 @@ var login = express()
        console.log('A user disconnected');
     });
  });
-
+  http.listen(PORT,function(){
+    console.log("Listening to port " + PORT);
+  });
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
