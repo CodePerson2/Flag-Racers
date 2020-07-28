@@ -212,16 +212,17 @@ var login = express()
   
   io.on('connection', function(socket) {
     console.log('A user connected');
- 
-  //Send a message when 
-  setTimeout(function() {
-    //Sending an object when emmiting an event
-    socket.emit('testerEvent', { description: 'A custom event named testerEvent!'});
-  }, 4000);
+    
+    var num = io.sockets.clients();
+    //Send a message when 
+    setTimeout(function() {
+      //Sending an object when emmiting an event
+      socket.emit('testerEvent', { description: "number of clients " + num});
+    }, 4000);
 
-  socket.on('disconnect', function () {
-    console.log('A user disconnected');
-  });
+    socket.on('disconnect', function () {
+      console.log('A user disconnected');
+    });
  });
   
 
