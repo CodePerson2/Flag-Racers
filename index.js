@@ -216,10 +216,12 @@ var login = express()
     console.log('A user connected');
     
     //Send a message when 
-    setTimeout(function() {
-      //Sending an object when emmiting an event
-      socket.emit('num', { description: "number of clients " + num});
-    }, 4000);
+    socket.on('clientLoc', function(data) {
+      console.log(data);
+      socket.broadcast.emit('friendLoc', {x: data.x, y: data.y});
+    });
+    
+    
 
     socket.on('disconnect', function () {
       num--;
