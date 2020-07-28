@@ -221,8 +221,5 @@ var login = express()
        console.log('A user disconnected');
     });
  });
-  http.listen(PORT,function(){
-    console.log("Listening to port " + PORT);
-  });
 
   login.listen(PORT, () => console.log(`Listening on ${ PORT }`))
