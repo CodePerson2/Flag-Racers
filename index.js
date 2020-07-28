@@ -218,7 +218,7 @@ var login = express()
     //Send a message when 
     setTimeout(function() {
       //Sending an object when emmiting an event
-      socket.emit('testerEvent', { description: "number of clients " + num});
+      socket.emit('num', { description: "number of clients " + num});
     }, 4000);
 
     socket.on('disconnect', function () {

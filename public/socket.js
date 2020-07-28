@@ -1,2 +1,2 @@
 var socket = io.connect('/');
-socket.on('testerEvent', function(data){document.write(data.description)});
+socket.on('num', function(data){document.write(data.description)});
