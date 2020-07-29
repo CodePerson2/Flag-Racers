@@ -1,30 +1,83 @@
-var socket = io.connect('/');
-//socket.on('num', function(data){document.write(data.description)});
+var socket; //socket connection
+var user1;  //element of either racing vehicle
+var user2;
 
-//var box = document.querySelector(".box");
-var dot1 = document.getElementById('dot1');
-var dot2 = document.getElementById('dot2');
-//var pageY = document.getElementById("y");
+function create(){
+    socket = io.connect('/');
 
-socket.on('friendLoc', function(data){
-    //console.log(data);
-    
-    dot2.style.left = (data.x + 'px');
-    dot2.style.top = (data.y + 'px');
-    //console.log(data.x);
-    
-});
-
-function updateDisplay(event) {
-    socket.emit('clientLoc', {x: event.pageX, y: event.pageY});
-  dot1.style.left = (event.pageX + 'px');
-  dot1.style.top = (event.pageY + 'px');
-
-
+    user1 = document.getElementById('dot1');
+    user2 = document.getElementById('dot2');
 }
 
-document.addEventListener("mousemove", updateDisplay, false);
-document.addEventListener("mouseenter", updateDisplay, false);
-document.addEventListener("mouseleave", updateDisplay, false);
+//type : 'friend' 'random'
+//groupid needed only for friend type
+//ex begin('friend', 3), begin('random')
+function begin(type, groupid = -1){
+    socket.emit('begin', {type: type, groupid: groupid});
+}
+
+//returns coordinates of other car
+//data = {y: yCord, x: xCord}
+function liveLoc(){
+    socket.on('friendLoc', function(data){
+        //console.log(data);
+        
+        user2.style.left = (data.x + 'px');
+        user2.style.top = (data.y + 'px');
+        //console.log(data.room);
+        return data;
+    });
+    
+}
+
+//sends the x,y variables to server
+function sendLoc(x, y){
+    socket.emit('clientLoc', {x: x, y: y});
+}
+
+function startGame(){
+    socket.on('gameStart', function(data){
+        console.log(data);
+    });
+}
+
+//catches end of game/ or connection
+function end(){
+    socket.on('end', function(data){
+        console.log(data.end);
+    });
+}
+function ready(){
+    socket.on('ready', function(data){
+        socket.emit('ready', 'start');
+
+        socket.off('ready');
+    })
+}
+
+//updates display for testing file
+function updateDisplay(event) {
+    sendLoc(event.pageX, event.pageY);
+    user1.style.left = (event.pageX + 'px');
+    user1.style.top = (event.pageY + 'px');
+}
+
+function move(){
+    
+    document.addEventListener("mousemove", updateDisplay, false);
+    document.addEventListener("mouseenter", updateDisplay, false);
+    document.addEventListener("mouseleave", updateDisplay, false);
+}
+
+
+create();
+begin('friend', 1);
+ready();
+startGame();
+move();
+liveLoc();
+end();
+
+
 
 

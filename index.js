@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 5000
 
 
 const { Pool } = require('pg');
+const { start } = require('repl');
+const { count } = require('console');
 var pool;
 pool = new Pool({
   //NOTE:  Make sure you replace the string with your own when testing it locally!
@@ -210,21 +212,81 @@ var login = express()
     })
   });
   
+
+  var waitRoom = 0;
   var num = 0;
+  var roomno = 1;
+
+
+
+  function makeRoom(io, socket, data){
+    if(data.type == 'random'){
+      
+        if(waitRoom == 0){
+          socket.join("room-" + roomno);
+          waitRoom = "room-" + roomno;
+          roomno++;
+          
+          console.log('here1');
+          return waitRoom;
+        }
+        else if(io.nsps['/'].adapter.rooms[waitRoom].length == 1){
+          socket.join(waitRoom);
+          let room = waitRoom;
+          waitRoom = 0;
+          console.log('here2');
+          return room;
+        }
+    }
+    else if(data.type == 'friend'){
+      socket.join(data.groupid);
+      console.log('friend');
+      return data.groupid;
+    }
+  }
+
+  function startGame(io, room, num){
+    setTimeout(function() {
+      io.in(room).emit('gameStart', num);
+      if(num-1 < 0){
+        return;
+      }
+      else startGame(io, room, num-1);
+    }, 2000);
+    
+  }
+
+
   io.on('connection', function(socket) {
     num++;
     console.log('A user connected');
+    var room;
+    var gameStart = false;
+
+    socket.on('begin', function(data){
+      room = makeRoom(io, socket, data);
+      socket.broadcast.to(room).emit('ready', 'start');
+    });
+    
+    socket.on('ready', function(data){
+      startGame(io, room, 3);
+    });
+
+
+    
     
     //Send a message when 
+
     socket.on('clientLoc', function(data) {
-      console.log(data);
-      socket.broadcast.emit('friendLoc', {x: data.x, y: data.y});
+      socket.broadcast.to(room).emit('friendLoc', {x: data.x, y: data.y, room: room});
     });
+    
     
     
 
     socket.on('disconnect', function () {
       num--;
+      socket.broadcast.to(room).emit('end', {code: 1, end: "user has left game"});
       console.log('A user disconnected');
     });
  });
