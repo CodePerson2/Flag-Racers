@@ -13,8 +13,12 @@ function create(){
 //type : 'friend' 'random'
 //groupid needed only for friend type
 //ex begin('friend', 3), begin('random')
-function begin(type, groupid = -1){
-    socket.emit('begin', {type: type, groupid: groupid});
+function begin(type, groupid = -1, username = null, flag = null){
+    socket.emit('begin', {type: type, groupid: groupid, flag: flag, username: username});
+    socket.on('begin', function(data){
+        socket.emit('begin', {type: type, groupid: groupid, flag: flag, username: username});
+        socket.off('begin');
+    });
 }
 
 //returns coordinates of other car
@@ -44,18 +48,31 @@ function startGame(){
 }
 
 //catches end of game/ or end of connection
-function end(){
+function detectEnd(){
     socket.on('end', function(data){
         console.log(data.end);
     });
 }
 
+function exchange(username = null, flag = null){
+    socket.emit('exchange', {flag: flag, username: username});
+    socket.on('exchange', function(data){
+        
+        socket.emit('exchange', {flag: flag, username: username});
+        return data;
+    })
+}
+
+
+
 //initates game and begins countdown 3,2,1,0 (startGame) when other user also runs ready()
+//returns username and flag on completion
 function ready(){
     socket.on('ready', function(data){
-        socket.emit('ready', 'start');
-
+        socket.emit('ready', {ready: 'start'});
         socket.off('ready');
+        console.log(data);
+        return data;
     })
 }
 
@@ -76,12 +93,12 @@ function move(){
 
 
 create();
-begin('friend', 1);
+begin('friend', 1, 'bob', 23);
 ready();
 startGame();
 move();
 liveLoc();
-end();
+detectEnd();
 
 
 

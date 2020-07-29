@@ -213,12 +213,14 @@ var login = express()
   });
   
 
+  //socket io functions
+
   var waitRoom = 0;
   var num = 0;
   var roomno = 1;
 
-
-
+  //makes room for game to run in
+  //random and friend game
   function makeRoom(io, socket, data){
     if(data.type == 'random'){
       
@@ -245,6 +247,7 @@ var login = express()
     }
   }
 
+  //starts game with count down from 3 to 0
   function startGame(io, room, num){
     setTimeout(function() {
       io.in(room).emit('gameStart', num);
@@ -256,7 +259,7 @@ var login = express()
     
   }
 
-
+//main connection, hnadles all functions
   io.on('connection', function(socket) {
     num++;
     console.log('A user connected');
@@ -264,7 +267,8 @@ var login = express()
 
     socket.on('begin', function(data){
       room = makeRoom(io, socket, data);
-      socket.broadcast.to(room).emit('ready', 'start');
+      socket.broadcast.to(room).emit('begin', {ready: 'begin'});
+      socket.broadcast.to(room).emit('ready', {ready: 'start', username: data.username, flag: data.flag});
     });
     
     socket.on('ready', function(data){
