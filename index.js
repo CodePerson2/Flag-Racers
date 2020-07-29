@@ -261,7 +261,6 @@ var login = express()
     num++;
     console.log('A user connected');
     var room;
-    var gameStart = false;
 
     socket.on('begin', function(data){
       room = makeRoom(io, socket, data);

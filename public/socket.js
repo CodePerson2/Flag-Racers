@@ -2,6 +2,7 @@ var socket; //socket connection
 var user1;  //element of either racing vehicle
 var user2;
 
+//creates socket connection to server
 function create(){
     socket = io.connect('/');
 
@@ -35,18 +36,21 @@ function sendLoc(x, y){
     socket.emit('clientLoc', {x: x, y: y});
 }
 
+//data is the countdown. both players recieve at same time
 function startGame(){
     socket.on('gameStart', function(data){
         console.log(data);
     });
 }
 
-//catches end of game/ or connection
+//catches end of game/ or end of connection
 function end(){
     socket.on('end', function(data){
         console.log(data.end);
     });
 }
+
+//initates game and begins countdown 3,2,1,0 (startGame) when other user also runs ready()
 function ready(){
     socket.on('ready', function(data){
         socket.emit('ready', 'start');
@@ -55,13 +59,14 @@ function ready(){
     })
 }
 
-//updates display for testing file
+//updates display for testing file ***
 function updateDisplay(event) {
     sendLoc(event.pageX, event.pageY);
     user1.style.left = (event.pageX + 'px');
     user1.style.top = (event.pageY + 'px');
 }
 
+//testing file use only ***
 function move(){
     
     document.addEventListener("mousemove", updateDisplay, false);
