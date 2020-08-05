@@ -96,7 +96,7 @@ window.onload = function checkCookie() {
   var user=getCookie("user credentials")
   //alert("You are still logged in, " + checkingCookie);
   if (user != ""){
-    var url = "flag.html?" + user;
+    var url = "UserHomePage.html?" + user;
     window.location.replace(url);
   }
 }

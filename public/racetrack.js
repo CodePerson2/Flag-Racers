@@ -2,9 +2,9 @@
   Sends user to 'race finished' page
 */
 function endGame() {
-  const  queryString = window.location.search;
+    const  queryString = window.location.search;
 
-  const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(queryString);
 
       urlParams.delete('status');
 
@@ -35,7 +35,7 @@ function endGame() {
     urlParams.delete('status');
         urlParams.delete('url');
 
-      window.location = "flag.html?";
+      window.location = "flag.html?" + urlParams;
   }
 
 /*
