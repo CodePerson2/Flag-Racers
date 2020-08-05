@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300&display=swap');
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+/*
+  Background
+*/
+.groupContainer {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: #daeced;
+  font-family: 'Hind Vadodara', Arial, Helvetica, sans-serif;
+}
+
+/*
+  "Settings" text
+*/
+.settingsText {
+  display: block;
+  text-align: center;
+  color: black;
+  font-family: "Racing Sans One", cursive;
+  font-size: 75px;
+}
+
+/*
+  Container for settings actions buttons (ie; remove friend, delete account, etc)
+*/
+.actionContainer {
+  position: absolute;
+  top: 22.5%;
+  left: 33%;
+  text-align: center;
+  height: 417px;
+  width: 485px;
+}
+
+/*
+  Change form display
+*/
+.formCont {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0); /* Black w/ opacity */
+  padding-top: 0px;
+  border-radius: 10px;
+}
+.form {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 80%;
+  border: 3px solid #f1f1f1;
+}
+
+/*
+  Change password button
+*/
+.changePass {
+  position: absolute;
+  left: 0px;
+  top: 30%;
+  color: white;
+  background-color: green;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.changePass:hover {
+  color: white;
+  background-color: red;
+}
+
+
+/*
+  Change username button
+*/
+.changeUser {
+  position: absolute;
+  color: white;
+  top: 30%;
+  right: 0px;
+  background-color: green;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.changeUser:hover {
+  color: white;
+  background-color: red;
+}
+
+/*
+  Remove friend button
+*/
+.removeFriend {
+  position: absolute;
+  top:50%;
+  left: 0px;
+  color: white;
+  background-color: green;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.removeFriend:hover {
+  color: white;
+  background-color: red;
+}
+
+/*
+  Delete account button
+*/
+.deleteAcc {
+  position: absolute;
+  color: white;
+  top: 50%;
+  right: 0px;
+  background-color: grey;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.deleteAcc:hover {
+  color: white;
+  background-color: red;
+}
+
+/*
+  Container for buttons that leave page (log out and back to home page)
+*/
+.leaveContainer {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  text-align: center;
+  height: 100px;
+  width: 300px;
+}
+
+/*
+  Back to home page button
+*/
+.backHome {
+  position: absolute;
+  color: white;
+  bottom: 10%;
+  left: 10%;
+  background-color: red;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.backHome:hover {
+  color: white;
+  background-color: green;
+}
+
+/*
+  Log out button
+*/
+.logOut {
+  position: absolute;
+  color: white;
+  bottom: 10%;
+  right: 0px;;
+  background-color: red;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.logOut:hover {
+  color: white;
+  background-color: green;
+}
+
+/*
+  Finish line pattern details
+*/
+.finishLine {
+  position: absolute;
+  width: 100%;
+  height: 33%;
+  top: 33%;
+  left: 0px;
+  background-color: #000000;
+}
+
+#square1 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 0px;
+}
+
+#square2 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 12.5%;
+}
+
+#square3 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 25%;
+}
+
+#square4 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 37.5%;
+}
+
+#square5 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 50%;
+}
+
+#square6 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 62.5%;
+}
+
+#square7 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  top: 0px;
+  left: 75%;
+}
+
+#square8 {
+  position: absolute;
+  width: 12.5%;
+  height: 50%;
+  background-color: #FFFFFF;
+  bottom: 0px;
+  left: 87.5%;
+}

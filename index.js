@@ -212,6 +212,85 @@ var login = express()
     })
   });
 
+/*
+  Settings options
+*/
+
+//  Delete account
+  login.post('/deleteAcc/:deleteAccArray', (req, res) => {
+    var deleteAccArr = req.params.deleteAccArray;
+    var deleteAcc = JSON.parse(deleteAccArr);
+
+    var removeUserQuery = `DELETE * FROM login where username = '` + deleteAcc.name +`' and password = '` + deleteAcc.password + `'`;
+
+    pool.query(removeUserQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Deleted successfully"});
+      }
+
+    })
+
+  });
+
+//  Remove friend
+  login.post('/removeFriend/:removeFriendArray', (req, res) => {
+    var removeFriendArr = req.params.removeFriendArray;
+    var removeFriend = JSON.parse(removeFriendArr);
+
+    var removeFriendQuery = `DELETE * FROM chat where name1 = '` + removeFriend.name +`' and name2 = '` + removeFriend.friend + `'`;
+
+    pool.query(removeFriendQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Friend removed successfully"});
+      }
+
+    })
+
+  });
+
+//  Change username
+  login.post('/changeUsername/:changeUsernameArray', (req, res) => {
+    var changeUserNameArr = req.params.changeUserNameArray;
+    var changeUserName = JSON.parse(changeUserNameArr);
+
+    var changeNameQuery = `UPDATE login SET username = '`+ changeUserName.newName +` where username = '` + changeUserName.name +`' and password = '` + changeUserName.password + `'`;
+
+    pool.query(changeNameQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Username changed successfully"});
+
+      }
+
+    })
+
+  });
+
+// Change password
+  login.post('/changePassword/:changePasswordArray', (req, res) => {
+    var changePasswordArr = req.params.changePasswordArray;
+    var changePassword = JSON.parse(changePasswordArr);
+
+    var changePasswordQuery = `UPDATE login SET password = '`+ changePassword.newPassword +` where username = '` + changePassword.name +`' and password = '` + changePassword.password + `'`;
+
+    pool.query(changeNameQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Password changed successfully"});
+      }
+
+    })
+
+  });
+
+
+
 
   //socket io functions
 

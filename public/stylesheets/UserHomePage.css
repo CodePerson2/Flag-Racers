@@ -94,6 +94,26 @@
 }
 
 /*
+  Logout button details
+*/
+.settings {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Hind Vadodara", Times, serif;
+}
+.settings:hover {
+  color: white;
+  background-color: green;
+}
+
+/*
   Finish line pattern details
 */
 .finishLine {
