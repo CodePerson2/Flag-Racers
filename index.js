@@ -11,7 +11,7 @@ var pool;
 pool = new Pool({
   //NOTE:  Make sure you replace the string with your own when testing it locally!
   // Example:  connectionString: 'postgres://postgres:[pass]@localhost:5432/[db name]'
-  //connectionString: process.env.DATABASE_URL  //database init
+  connectionString: process.env.DATABASE_URL  //database init
 });
 
 var login = express()
