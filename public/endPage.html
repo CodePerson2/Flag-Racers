@@ -31,4 +31,16 @@
 
     </div>
   </body>
+
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const page_type = urlParams.get('status');
+    if (page_type === "win"){
+      alert("You win");
+    }
+    else{
+      alert("You lost");
+    }
+    </script>
 </html>

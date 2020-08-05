@@ -10,8 +10,8 @@ const { count } = require('console');
 var pool;
 pool = new Pool({
   //NOTE:  Make sure you replace the string with your own when testing it locally!
-  // Example:   connectionString: 'postgres://postgres:[pass]@localhost:5432/[db name]'
-  connectionString: process.env.DATABASE_URL  //database init
+  // Example:  connectionString: 'postgres://postgres:[pass]@localhost:5432/[db name]'
+  //connectionString: process.env.DATABASE_URL  //database init
 });
 
 var login = express()
@@ -211,24 +211,26 @@ var login = express()
       }
     })
   });
-  
+
 
   //socket io functions
 
   var waitRoom = 0;
   var num = 0;
   var roomno = 1;
+  var clientStatus = [];
+  var switchNo = -1;
 
   //makes room for game to run in
   //random and friend game
   function makeRoom(io, socket, data){
     if(data.type == 'random'){
-      
+
         if(waitRoom == 0){
           socket.join("room-" + roomno);
           waitRoom = "room-" + roomno;
           roomno++;
-          
+
           console.log('here1');
           return waitRoom;
         }
@@ -256,13 +258,14 @@ var login = express()
       }
       else startGame(io, room, num-1);
     }, 2000);
-    
+
   }
 
 //main connection, hnadles all functions
   io.on('connection', function(socket) {
     num++;
-    console.log('A user connected');
+    clientStatus[num] = -1;
+    console.log('A user connected ' + num);
     var room;
 
     socket.on('begin', function(data){
@@ -270,29 +273,49 @@ var login = express()
       socket.broadcast.to(room).emit('begin', {ready: 'begin'});
       socket.broadcast.to(room).emit('ready', {ready: 'start', username: data.username, flag: data.flag});
     });
-    
+
     socket.on('ready', function(data){
       startGame(io, room, 3);
     });
 
 
-    
-    
-    //Send a message when 
+
+
+    //Send a message when
 
     socket.on('clientLoc', function(data) {
-      socket.broadcast.to(room).emit('friendLoc', {x: data.x, y: data.y, room: room});
+      for (var i = 1; i < 4; i++){
+        if (clientStatus[i] == -1){
+          clientStatus[i] = data.uid;
+        }
+        if (clientStatus[i] == data.uid){
+          switchNo = i;
+          break;
+        }
+      }
+
+      if (switchNo == 1) {
+        socket.broadcast.to(room).emit('friendLoc', {x: data.x, y: data.y, z: data.z, finish:data.finish, room: room});
+      }
+      if (switchNo == 2) {
+        socket.broadcast.to(room).emit('friendLoc2', {x: data.x, y: data.y, z: data.z, finish:data.finish, room: room});
+      }
+      if (switchNo == 3) {
+        socket.broadcast.to(room).emit('friendLoc3', {x: data.x, y: data.y, z: data.z, finish:data.finish, room: room});
+      }
     });
-    
-    
-    
+
+
+
 
     socket.on('disconnect', function () {
+      if (num == 2){
+        for (var i = 2; i < 5; i++){
+            clientStatus[i] = -1;
+          }
+      }
       num--;
       socket.broadcast.to(room).emit('end', {code: 1, end: "user has left game"});
       console.log('A user disconnected');
     });
  });
-  
-
-

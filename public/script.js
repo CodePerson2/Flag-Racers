@@ -18,9 +18,31 @@ $(function() {
     var line_8 = $('#midLine2');
     var line_9 = $('#midLine3');
     var restart_btn = $('.endButton');
-    var score = $('#barFill');
+    var score = $('#userProg');
+    var car_1_score = $('#bot1Prog');
+    var car_2_score = $('#bot2Prog');
+    var car_3_score = $('#bot3Prog');
     var finish = $('.finishLine');
     var carFlag = $('#playerFlag');
+
+    //Pick up variables
+    var blockItem = $('#sinkhole');
+    var slowDown = $('#slowTrack');
+    var speedUp = $('#speedTrack');
+    var endNow = $('#crash');
+    var quickWin = $('#jumptoFinish');
+    var resetProg = $('#reset');
+    var blockedMovement = 0;
+    var aBlock = false;
+    var aBlockTime = false;
+    var slowTime = 0;
+    var speedTime = 0;
+
+    //Socket IO init
+    var socket = io.connect('/');
+    var lostGame = false;
+    var winGame = false;
+    var numUsers = 0;
 
     //saving location of racetrack and car dimensions
     var container_left = parseInt(container.css('left'));
@@ -28,6 +50,8 @@ $(function() {
     var container_height = parseInt(container.height());
     var car_width = parseInt(car.width());
     var car_height = parseInt(car.height());
+    var pickup_width = parseInt(blockItem.width());
+    var pickup_height = parseInt(blockItem.height());
 
     //interactive variables for game function
     var game_over = false;
@@ -45,9 +69,9 @@ $(function() {
     // Begin function for moving a car with arrow keys
     // Hold down an arrow key causes car to move
     $(document).on('keydown', function(e) {
-        if (game_over === false) {
+        if (game_over === false && aBlock == false) {
             var key = e.keyCode;
-            if (key === 37 && move_left === false) {
+            if (key === 37 && move_left === false ) {
                 move_left = requestAnimationFrame(left);
             } else if (key === 39 && move_right === false) {
                 move_right = requestAnimationFrame(right);
@@ -81,28 +105,28 @@ $(function() {
 
     // Changes to car position on page depending on key held
     function left() {
-        if (game_over === false && parseInt(car.css('left')) > 0) {
+        if (aBlock == false && game_over === false && parseInt(car.css('left')) > 0) {
             car.css('left', parseInt(car.css('left')) - 5);
             move_left = requestAnimationFrame(left);
         }
     }
 
     function right() {
-        if (game_over === false && parseInt(car.css('left')) < container_width - car_width) {
+        if (aBlock == false && game_over === false && parseInt(car.css('left')) < container_width - car_width) {
             car.css('left', parseInt(car.css('left')) + 5);
             move_right = requestAnimationFrame(right);
         }
     }
 
     function up() {
-        if (game_over === false && parseInt(car.css('top')) > 0) {
+        if (aBlock == false && game_over === false && parseInt(car.css('top')) > 0) {
             car.css('top', parseInt(car.css('top')) - 3);
             move_up = requestAnimationFrame(up);
         }
     }
 
     function down() {
-        if (game_over === false && parseInt(car.css('top')) < container_height - car_height) {
+        if (aBlock == false && game_over === false && parseInt(car.css('top')) < container_height - car_height) {
             car.css('top', parseInt(car.css('top')) + 3);
             move_down = requestAnimationFrame(down);
         }
@@ -126,38 +150,123 @@ $(function() {
     carFlag.css('max-width', '100%');
     carFlag.css('max-height', '100%');
 
+    /* Socket IO request user ID */
+    var idPass = urlParams.get('uid');
+    /* Socket IO init calls */
+    begin('friend', 1, 'bob', 23, 'evan', 21, 'eve', 11);
+    ready();
+    startGame();
+    sendLoc(idPass, car.css('left'),car.css('top'), score.css('width'), lostGame);
+    liveLoc();
+    /* End socket io init calls */
+
     function repeat() {
-      // Test code on car collision causing game to end
-      // Can be repurposed for colliding into objects causing player to slow car down
-      // or maybe speed up
+        sendLoc(idPass, car.css('left'),car.css('top'), score.css('width'), lostGame);
+        console.log(lostGame);
+        if (lostGame){
+          //alert("You lost");
+          stop_the_game(false);
+        }
+      /*   Collision Tests  */
+
+        // Test code on car collision causing game to end
+        // Can be repurposed for colliding into objects causing player to slow car down
+        // or maybe speed up
+
+        /*
         if (collision(car, car_1) || collision(car, car_2) || collision(car, car_3)) {
             stop_the_game();
             return;
         }
+        */
+        // Reset block movement
+        if (blockedMovement < 0){
+          aBlock = false;
+          blockedMovement = 0;
+        }
 
-        score_counter++;
+        // Detect block movements
+        if (collision(car, blockItem)){
+          blockedMovement = 250;
+          aBlock = true;
+        }
+        // Detect slowingDown collision
+        else if(collision(car, slowDown)){
+          slowTime = 200;
+          aBlockTime = true;
+        }
+        // Detect speedUp collision
+        else if(collision(car, speedUp)){
+          speedTime = 100;
+          aBlockTime = true;
+        }
+        // Detect endCrash Collision
+        else if (collision (car, endNow)){
+          stop_the_game();
+          return;
+        }
+        // Detect quickWin Collision
+        else if (collision (car, quickWin)){
+          score_counter = 2899;
+        }
+        // Detect resetProg collision
+        else if (collision (car, resetProg)){
+          score_counter = 0;
+        }
+
+      /*  End Collision Tests */
+      /*  Counters for Time penalty and Points  */
+        blockedMovement--;
+
+        // Default normal count, if collision slows down counter
+        if (aBlockTime){
+          if (slowTime > 0) {
+            slowTime--;
+            if (slowTime % 2 == 0){
+              score_counter++;
+            }
+          }
+          if (speedTime > 0){
+            speedTime--;
+            score_counter++;
+            score_counter++;
+          }
+          if (slowTime < 1 && speedTime < 1){
+            aBlockTime = false;
+          }
+        }
+        else {
+          score_counter++;
+        }
 
         // Iterating the progress bar
         if (score_counter % 20 == 0) {
             score.text(parseInt(score.text()) + 1);
-            var tempScore = score_counter/10;
+            var tempScore = score_counter/30;
             var strScore = tempScore.toString() + "%";
             score.css('width', strScore);
         }
 
         //Show and move the finish line when near the end of the race
-        if (score_counter >= 900){
+        if (score_counter >= 2900){
           finish.css('visibility', 'visible');
-          var tempScoreFinish = (score_counter + 1) - 900;
+          var tempScoreFinish = (score_counter + 1) - 2950;
           var strScore = tempScoreFinish.toString() + "%";
           finish.css('top', strScore);
         }
 
+        // In case user hits trap that sends them back
+        if (score_counter < 2900) {
+          finish.css('visibility', 'hidden');
+        }
+
         //Ends game upon hitting the finish line
-        if (score_counter == 1000){
+        if (score_counter > 3000){
+          lostGame = true; //This is to send
+          lostGameAlert();
           finish.css('visibility', 'hidden');
           finish.css('top', 0);
-          stop_the_game();
+          stop_the_game(true);
           return;
         }
 
@@ -168,9 +277,18 @@ $(function() {
         }
 
         //Methods for animating the cars and track as if it's moving
+        /*
         car_down(car_1);
         car_down(car_2);
         car_down(car_3);
+        */
+
+        block_movement_down(blockItem);
+        block_movement_down(slowDown);
+        block_movement_down(speedUp);
+        block_movement_down(quickWin);
+        block_movement_down(resetProg);
+        block_movement_down(endNow);
 
         line_down(line_1);
         line_down(line_2);
@@ -182,17 +300,32 @@ $(function() {
         line_down(line_8);
         line_down(line_9);
 
+
+
         anim_id = requestAnimationFrame(repeat);
+    }
+
+    // Item that blocks movement keys
+    function block_movement_down(theItem) {
+      var block_current_top = parseInt(theItem.css('top'));
+      if (block_current_top > container_height) {
+          block_current_top = -200;
+          var block_shift = parseInt(Math.random() * (container_width - pickup_width));
+          theItem.css('left', block_shift);
+      }
+      theItem.css('top', block_current_top + speed);
     }
 
     // For now car is just a collision object isn't exactly part of the race
     function car_down(car) {
         var car_current_top = parseInt(car.css('top'));
+        /*
         if (car_current_top > container_height) {
             car_current_top = -200;
             var car_left = parseInt(Math.random() * (container_width - car_width));
             car.css('left', car_left);
         }
+        */
         car.css('top', car_current_top + speed);
     }
 
@@ -211,8 +344,8 @@ $(function() {
     });
 
     // Function to stop game when needed
-    function stop_the_game() {
-        game_redirect();
+    function stop_the_game(status) {
+        game_redirect(status);
         game_over = true;
         cancelAnimationFrame(anim_id);
         cancelAnimationFrame(move_right);
@@ -221,17 +354,22 @@ $(function() {
         cancelAnimationFrame(move_down);
         restart_div.slideDown();
         restart_btn.focus();
-        setHighScore();
+
+        detectEnd();  //Socket IO end
     }
 
     //End game redirect
-    function game_redirect(){
+    function game_redirect(status){
       console.log("redirection attempted!");
       const  queryString = window.location.search;
 
       const urlParams = new URLSearchParams(queryString);
-
-      window.location = "endPage.html?" + urlParams;
+      if (status){
+        window.location = "endPage.html?" + urlParams + "&status=win";
+      }
+      else{
+        window.location = "endPage.html?" + urlParams + "&status=loss";
+      }
     }
 
     // Collision check with objects
@@ -253,6 +391,95 @@ $(function() {
         return true;
     }
 
+    function lostGameAlert(){
+      sendLoc(idPass, car.css('left'),car.css('top'), score.css('width'), lostGame);
+    }
+
+    /* socket IO functions for cars */
+
+    //type : 'friend' 'random'
+    //groupid needed only for friend type
+    //ex begin('friend', 3), begin('random')
+    function begin(type, groupid = -1, username = null, flag = null){
+        socket.emit('begin', {type: type, groupid: groupid, flag: flag, username: username});
+        socket.on('begin', function(data){
+            socket.emit('begin', {type: type, groupid: groupid, flag: flag, username: username});
+            socket.off('begin');
+        });
+    }
+
+    //initates game and begins countdown 3,2,1,0 (startGame) when other user also runs ready()
+    //returns username and flag on completion
+    function ready(){
+        socket.on('ready', function(data){
+          socket.emit('ready', {ready: 'start'});
+          socket.off('ready');
+          console.log(data);
+          return data;
+          })
+      }
+
+      //data is the countdown. both players recieve at same time
+      function startGame(){
+          socket.on('gameStart', function(data){
+              console.log(data);
+          });
+      }
+
+    //returns coordinates of other car
+    //data = {y: yCord, x: xCord}
+    function liveLoc(){
+    socket.on('friendLoc', function(data){
+          //console.log(data);
+          car_1.css('left', data.x);
+          car_1.css('top', data.y);
+          car_1_score.css('width', data.z);
+          //console.log(data.room);
+
+          lostGame = data.finish;
+
+          return data;
+      });
+
+      socket.on('friendLoc2', function(data){
+          //console.log(data);
+
+          car_2.css('left', data.x);
+          car_2.css('top', data.y);
+          car_2_score.css('width', data.z);
+          //console.log(data.room);
+
+          lostGame = data.finish;
+
+          return data;
+      });
+
+      socket.on('friendLoc3', function(data){
+          //console.log(data);
+
+          car_3.css('left', data.x);
+          car_3.css('top', data.y);
+          car_3_score.css('width', data.z);
+          //console.log(data.room);
+
+          lostGame = data.finish;
+
+          return data;
+      });
+
+    }
+
+    //sends the x,y variables to server
+    function sendLoc(uid, x, y, z, finish){
+      socket.emit('clientLoc', {uid:uid, x: x, y: y, z: z, finish: finish});
+    }
+
+    //catches end of game/ or end of connection
+    function detectEnd(){
+        socket.on('end', function(data){
+            console.log(data.end);
+        });
+    }
 
 
 });

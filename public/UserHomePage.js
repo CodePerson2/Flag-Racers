@@ -4,9 +4,8 @@
 function race() {
   const  queryString = window.location.search;
 
-  const urlParams = new URLSearchParams(queryString);
-
-  window.location = "flag.html?" + urlParams;
+  var val = window.location.href.split('?');
+  window.location = "flag.html?" + 'uid='+ val[1];
   //location.href="flag.html";
 }
 

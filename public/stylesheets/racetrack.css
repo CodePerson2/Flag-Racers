@@ -95,6 +95,7 @@
   height: 100%;
   width: 100%;
   background-color: #808080;
+  overflow: hidden;
 }
 
 /*
@@ -253,6 +254,8 @@
   border-radius: 20px;
 }
 
+
+
 /*
   Left front wheel placement
 */
@@ -389,4 +392,71 @@
   background-color: var(--botCarFlag3);
   bottom: 30%;
   left: 86%;
+}
+
+/*
+  Pickup for killing movement
+*/
+#sinkhole {
+  position: absolute;
+  background-color: green;
+  top: 150px;
+  left: 91%;
+}
+/*
+  Pickup for increasing track speed
+*/
+#speedTrack {
+  position: absolute;
+  background-color: orange;
+  top: -325px;
+  left: 88%;
+}
+/*
+  Pickups for slowing track speed
+*/
+#slowTrack {
+  position: absolute;
+  background-color: purple;
+  top: 325px;
+  left: 70%;
+}
+/*
+  Pickups for instant win
+*/
+#jumptoFinish {
+  position: absolute;
+  background-color: black;
+  top: -200px;
+  left: 75%;
+}
+
+/*
+  Pickups that ends game for player
+*/
+#crash {
+  position: absolute;
+  background-color: cyan ;
+  top: -150px;
+  left: 80%;
+}
+
+/*
+  Pickups for restarting player's progress
+*/
+#reset {
+  position: absolute;
+  background-color: white;
+  top: 0px;
+  left: 50%;
+}
+
+/*
+  Pickups
+*/
+.pickup {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  border-radius: 5px;
 }

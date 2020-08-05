@@ -6,6 +6,8 @@ function endGame() {
 
   const urlParams = new URLSearchParams(queryString);
 
+      urlParams.delete('status');
+
     window.location = "endPage.html?" + urlParams;
   }
 
@@ -17,6 +19,8 @@ function endGame() {
 
     const urlParams = new URLSearchParams(queryString);
 
+        urlParams.delete('status');
+
       window.location = "racetrack.html?" + urlParams;
   }
 
@@ -27,6 +31,9 @@ function endGame() {
     const  queryString = window.location.search;
 
     const urlParams = new URLSearchParams(queryString);
+
+    urlParams.delete('status');
+        urlParams.delete('url');
 
       window.location = "flag.html?";
   }
