@@ -54,9 +54,7 @@ function logout(){
 }
 
 function backHome() {
-  const  queryString = window.location.search;
-
-  const urlParams = new URLSearchParams(queryString);
-
-  window.location = "UserHomePage.html?" + urlParams;
+  var val = window.location.href.split('?');
+  var val = val[1].split('=');
+  window.location = "UserHomePage.html?" + val[1];
 }

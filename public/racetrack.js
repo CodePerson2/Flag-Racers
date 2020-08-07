@@ -37,6 +37,13 @@ function endGame() {
 
       window.location = "flag.html?" + urlParams;
   }
+  function home(){
+    var val = window.location.href.split('?');
+    var id = val[1].split('&');
+    var id = id[0].split('%');
+    var id = id[0].split('=');
+    window.location = "UserHomePage.html?" + id[1];
+  }
 
 /*
   Logs user out

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/Settings.css">
+    <script src="/Settings.js"></script>
+    <title>User Settings</title>
+  </head>
+  <body>
+    <div class="groupContainer">
+
+      <div class="finishLine">
+        <div id= "square1" class="square"></div>
+        <div id= "square2" class="square"></div>
+        <div id= "square3" class="square"></div>
+        <div id= "square4" class="square"></div>
+        <div id= "square5" class="square"></div>
+        <div id= "square6" class="square"></div>
+        <div id= "square7" class="square"></div>
+        <div id= "square8" class="square"></div>
+      </div>
+      <p class="settingsText">Settings</p>
+
+      <div class="actionContainer">
+
+
+        <button type="button" class="changePass" onclick="showPForm()">CHANGE PASSWORD</button>
+        <button type="button" class="changeUser" onclick="showUForm()">CHANGE USERNAME</button>
+        <button type="button" class="removeFriend" onclick="showFForm()">REMOVE FRIEND</button>
+        <button type="button" class="deleteAcc" onclick="showDForm()">DELETE ACCOUNT</button>
+
+        <div id="PForm" class="formCont">
+          <form class="form" action="index.html" method="post">
+            <div class="container">
+
+              <label for="uname"><b>Enter Username</b></label>
+              <br>
+              <input id = "p_username" type="text" placeholder="Enter Username" name="uname" maxlength="29" required>
+              <br>
+              <label for="psw"><b>Enter current password</b></label>
+              <br>
+              <input id = "p_password" type="password" placeholder="Enter Password" name="psw" maxlength="29" required>
+              <br>
+              <label for="npsw"><b>Enter new password</b></label>
+              <br>
+              <input id = "p_newPassword" type="password" placeholder="Enter New Password" name="npsw" maxlength="29" required>
+              <br>
+              <label for="rnpsw"><b>Re-enter new password</b></label>
+              <br>
+              <input id = "p_newPassword2" type="password" placeholder="Re-enter New Password" name="rnpsw" maxlength="29" required>
+              <br>
+              <input value = "Submit" type="button" onclick="changePass()">
+
+              <button type="button" onclick="hideForm()" class="cancel">Cancel</button>
+
+            </div>
+          </form>
+        </div>
+
+
+        <div id="UForm" class="formCont">
+
+          <form class="form" action="index.html" method="post">
+            <div class="container">
+
+              <label for="username"><b>Enter Username</b></label>
+              <br>
+              <input id = "u_username" type="text" placeholder="Enter Username" name="uname" maxlength="29" required>
+              <br>
+              <label for="newUname"><b>Enter New Username</b></label>
+              <br>
+              <input id = "u_newUsername" type="text" placeholder="Enter New Username" name="uname" maxlength="29" required>
+              <br>
+              <label for="psw"><b>Enter password</b></label>
+              <br>
+              <input id = "u_password" type="password" placeholder="Enter Password" name="psw" maxlength="29" required>
+              <br>
+              <input value = "Change" type="button" onclick="changeUserN()">
+              <button type="button" onclick="hideForm()" class="cancel">Cancel</button>
+
+            </div>
+          </form>
+
+        </div>
+
+
+        <div id="FForm" class="formCont">
+          <form class="form" action="index.html" method="post">
+            <div class="container">
+
+              <label for="uname"><b>Enter Username</b></label>
+              <br>
+              <input id = "r_username" type="text" placeholder="Enter Username" name="uname" maxlength="29" required>
+              <br>
+              <label for="psw"><b>Enter password</b></label>
+              <br>
+              <input id = "r_password" type="password" placeholder="Enter Password" name="psw" maxlength="29" required>
+              <br>
+              <label for="funame"><b>Enter Friend Username</b></label>
+              <br>
+              <input id = "r_friend" type="text" placeholder="Enter Username" name="funame" maxlength="29" required>
+              <br>
+              <input value = "Submit" type="button" onclick="removeFriend()">
+              <button type="button" onclick="hideForm()" class="cancel">Cancel</button>
+
+            </div>
+          </form>
+
+        </div>
+
+
+        <div id="DForm" class="formCont">
+          <form class="form" action="index.html" method="post">
+            <div class="container">
+
+              <label for="uname"><b>Enter Username</b></label>
+              <br>
+              <input id = "d_username" type="text" placeholder="Enter Username" name="uname" maxlength="29" required>
+              <br>
+              <label for="psw"><b>Enter password</b></label>
+              <br>
+              <input id = "d_password" type="password" placeholder="Enter Password" name="psw" maxlength="29" required>
+              <br>
+              <input value = "Delete" type="button" onclick="deleteAcc()">
+              <button type="button" onclick="hideForm()" class="cancel">Cancel</button>
+
+            </div>
+          </form>
+
+        </div>
+
+
+      </div>
+
+      <div class="leaveContainer">
+        <button type="button" class="backHome" onclick= "backHome()">BACK</button>
+        <button type="button" class="logOut" onclick= "logout()">LOGOUT</button>
+      </div>
+
+    </div>
+  </body>
+</html>

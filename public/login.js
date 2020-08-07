@@ -45,14 +45,14 @@ function send(type) {
             var res = JSON.parse(this.responseText);
             //console.log(res);
             if(res.res == 0){
-                if(res.res == 'success'){alert("Account made");}
+                if(res.data == 'success'){alert("Account made");}
                 else if(res.data.rows == ''){
                     alert('username or password is incorrect');
                 }
                 else if(res.data.length == 0){
                     alert("wrong password/username");
                 }
-                else if(res.data[0].username != ''){
+                else if(res.data[0].username != '' && type == 'GET'){
                     //var url = "UserHomePage.html?" + res.data[0].userid;
                     var url = "UserHomePage.html?" + res.data[0].userid;
                     window.location.replace(url);
@@ -60,6 +60,7 @@ function send(type) {
                 }
                 else{
                     console.log("nothing");
+                    console.log(res);
                 }
             }
             else if(res.res == 1){

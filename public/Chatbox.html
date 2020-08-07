@@ -4,11 +4,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flag Racer Chat</title>
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
+html
+{
+  font-family: 'Racing Sans Three', cursive;
+}
+body
 {
   margin:0;
   padding:0;
   box-sizing:border-box;
+  font-family: 'Racing Sans One', cursive;
 }
 /* General styling */
  img{
@@ -66,8 +71,13 @@ header{
   margin:5px 2px 1px 2px;
 }
 .username{
+  font-family: 'Racing Sans One', cursive;
   text-transform:capitalize;
   font-weight:bold;
+  font-size: 40px;
+}
+h3{
+  font-family: 'Racing Sans Two', cursive;
 }
 .status{
   font-style:italic;
@@ -92,6 +102,7 @@ header{
 ul.activeChats{
       width: 100%;
       margin:0px;
+      overflow: auto;
   }
 ul.activeChats li{
     padding:0.5em;
@@ -108,8 +119,9 @@ ul.activeChats li .groupImage{
 }
 ul.activeChats li .groupName{
  text-overflow: ellipsis;
- font-size: 15px;
+ font-size: 21px;
  cursor: pointer;
+ font-family: 'Hind Vadodara', sans-serif;
 }
 /* Messages */
 *{
@@ -144,9 +156,9 @@ ul.activeChats li .groupName{
   background: #000000;
 }
 .container .message-body{
-  height:calc(100% - 85px);
+  height:calc(100% - 10px);
   box-shadow: inset 0 10px 10px -10px #000000;
-  overflow-x: hidden;
+  overflow: auto;
   margin-bottom:15px;
   width:100%;
   padding: 0 16px;
@@ -161,6 +173,7 @@ ul.activeChats li .groupName{
   position: relative;
   padding: 20px;
   overflow-wrap: break-word;
+  font-family: 'Racing Sans Three', cursive;
   min-width: 50%;
   max-width: 70%;
   margin: 10px 0 5px 0px;
@@ -207,7 +220,7 @@ ul.activeChats li .groupName{
 
 .chat-screen{
   display: flex;
-  height: 1000%;
+  height: 83vh;
 }
 
 /* input Bottom */
@@ -225,20 +238,20 @@ footer{
   position: absolute;
   justify-content: center;
   align-items: center;
-  height:70px;
+  height:80px;
   width:100%;
   margin:0;
   overflow:hidden;
 }
 .form{
-  position:absolute;
+  position:relative;
   width: 80%;
 }
 .sendMess{
   border-radius:50px;
 }
  textarea, .sendMess button{
-  max-height:100px;
+  max-height:40px;
 }
 .sendMess button
 {
@@ -322,6 +335,7 @@ textarea:focus,button:focus{
   margin-right: 16px;
   border: none;
   font-size: 17px;
+  width: 90%;
 }
 
 @media  only screen and (max-width:700px){
@@ -344,14 +358,10 @@ textarea:focus,button:focus{
         <div class="screen-container">
                  <header>
       <div class="user-details">
-        <img
-        alt="gravater"
-          class="dp"
-          src='https://www.crwflags.com/fotw/images/c/ch.gif'
-        />
+        
         <div class="detail-txt">
           <span class="username">
-           Switzerland
+           CHAT
            <div class='status'></div>
           </span>
 
@@ -362,7 +372,7 @@ textarea:focus,button:focus{
         <span> <i class="fa fa-bell"></i> </span>
         <span> <i class="fa fa-bars"></i> </span>
       </div>
-      <h2 id="chatname"></h3>
+      <h2 id="chatname" style="font-family: 'Racing Sans Three', cursive;"></h3>
     </header>
 <div class="chat-screen">
 <div class="sidebar">
@@ -371,35 +381,10 @@ textarea:focus,button:focus{
   <button type="button" id="logOut" onclick="logout()">LOG OUT</button>
   <input id = "inp" type="text" placeholder="Search..">
 </div>
+<h3>Active Chats</h3>
    <ul class="activeChats" id = "chatlist">
-       <h3>Active Chats</h3>
-       <li>
-           <div class="dp"><img
-        alt="gravater"
-          class="dp"
-          src='https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg'
-        /></div>
-           <span class="groupName">USA</span>
-           <span>42</span>
-       </li>
-       <li>
-       <div class="dp"><img
-        alt="gravater"
-          class="dp"
-          src='https://www.crwflags.com/fotw/images/c/ca.gif'
-        /></div>
-           <span>Canada</span>
-           <span>42</span>
-       </li>
-       <li>
-       <div class="dp"><img
-        alt="gravater"
-          class="dp"
-          src='https://www.crwflags.com/fotw/images/c/cn.gif'
-        /></div>
-           <span>China</span>
-           <span>42</span>
-       </li>
+       
+       
  </ul>
 </div>
 <!-- END OF SIDEBAR -->
@@ -531,5 +516,7 @@ const body = document.querySelector('body');
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
 <script deref src="Chatbox-conn.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&family=Racing+Sans+One&display=swap" rel="stylesheet">
 </body>
 </html>>

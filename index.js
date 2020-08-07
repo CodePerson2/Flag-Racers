@@ -39,7 +39,7 @@ var login = express()
     }
 
     if(true){
-      var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`)`;
+      var getUsersQuery = `INSERT INTO login(username, password, admin, logincount) VALUES('` + signup.name + `', '`  + signup.password + `', `  + admin + `, `  + 0 +`) RETURNING userid`;
     }
     pool.query(getUsersQuery, (error, result) => {
       if(error){
@@ -48,10 +48,10 @@ var login = express()
       else{
 
         //Setting up a cookie to track logins
-        res.cookie("user credentials", signup.name);
+        res.cookie("user credentials", result.rows[0].userid);
 
         var results = {'rows': result.rows}
-        res.send({res : 0, data : JSON.stringify('success')});
+        res.send({res : 0, data : 'success'});
       }
 
 
@@ -73,23 +73,24 @@ var login = express()
         res.send({res : 1, data : error});
       }
 
-      else{
+      else if(result.rows.length > 0){
 
+        res.cookie("user credentials", result.rows[0].userid);
+        res.send({res : 0, data : result.rows});
+      }
+      else{
         //Setting up a cookie to track logins
-        res.cookie("user credentials", signin.name);
 
         res.send({res : 0, data : result.rows});
       }
-      if(signin.admin ===1){
-        return res.redirect('/admin');
-      }
+
     })
     // access database using uid
 
   });
 
   function addfriend(res, userid, friendid, username, friendname){
-    var UserQuery = `INSERT INTO chat(user1, user2, name1, name2) VALUES('`+ userid +`', '`+ friendid +`', '`+ username +`', '`+ friendname +`')`;
+    var UserQuery = `INSERT INTO chat(user1, user2, name1, name2) VALUES(`+ userid +`, `+ friendid +`, '`+ username +`', '`+ friendname +`')`;
 
     pool.query(UserQuery, (error, result) => {
       if(error){
@@ -211,6 +212,132 @@ var login = express()
       }
     })
   });
+
+/*
+  Settings options
+*/
+
+//  Delete account
+  login.post('/deleteAcc/:deleteAccArray', (req, res) => {
+    var deleteAccArr = req.params.deleteAccArray;
+    var deleteAcc = JSON.parse(deleteAccArr);
+
+    var removeUserQuery = `DELETE FROM message where chatid IN 
+                              (SELECT chatid FROM chat where name1 = '` + deleteAcc.name +`' or name2 = '` + deleteAcc.name + `');
+                              
+                              DELETE FROM chat 
+                              where (name1 = '` + deleteAcc.name +`' or name2 = '` + deleteAcc.name + `');
+
+                              DELETE FROM login 
+                              where (username = '` + deleteAcc.name +`' and password = '` + deleteAcc.password + `');`;
+                              
+                          /*
+                          `DELETE FROM login L, message M, chat C
+                          WHERE (L.username = '` + deleteAcc.name +`' and L.password = '` + deleteAcc.password + `')
+                          AND M.userid=L.userid
+                          AND (C.user1=L.userid OR C.user2=L.userid)'`;
+                          */
+
+    pool.query(removeUserQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : 'success'});
+      }
+
+    })
+
+  });
+
+//  Remove friend
+  login.post('/removeFriend/:removeFriendArray', (req, res) => {
+    var removeFriendArr = req.params.removeFriendArray;
+    var removeFriend = JSON.parse(removeFriendArr);
+
+    var removeFriendQuery = `DELETE FROM message where chatid = 
+                            (SELECT chatid FROM chat 
+                              where (name1 = '` + removeFriend.name +`' and name2 = '` + removeFriend.friend + `') 
+                              OR (name1 = '` + removeFriend.friend +`' and name2 = '` + removeFriend.name + `')); 
+                              
+                              DELETE FROM chat 
+                              where (name1 = '` + removeFriend.name +`' and name2 = '` + removeFriend.friend + `') 
+                              OR (name1 = '` + removeFriend.friend +`' and name2 = '` + removeFriend.name + `');`;
+    
+    
+  
+    /*
+                              `DELETE FROM chat
+                               WHERE (name1 = '` + removeFriend.name +`' AND name2 = '` + removeFriend.friend + `')
+                                  OR (name2 = '` + removeFriend.name +`' AND name1 = '` + removeFriend.friend + `')'`;
+                            */
+                            /*
+                              `DELETE FROM chat C, message M
+                               WHERE ( (C.name1 = '` + removeFriend.name +`' AND C.name2 = '` + removeFriend.friend + `')
+                                    OR (C.name2 = '` + removeFriend.name +`' AND C.name1 = '` + removeFriend.friend + `') )
+                               AND M.chatid = C.chatid'`;
+                            */
+                            /*
+                            `DELETE FROM chat C, message M
+                             WHERE C.chatid =(
+                                                SELECT chatid
+                                                FROM chat
+                                                WHERE (name1 = '` + removeFriend.name +`' AND name2 = '` + removeFriend.friend + `')
+                                                   OR (name2 = '` + removeFriend.name +`' AND name1 = '` + removeFriend.friend + `')'
+                                              )
+                             AND M.chatid = C.chatid;'`;
+                             */
+
+    console.log(removeFriendQuery);
+    pool.query(removeFriendQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Friend removed successfully"});
+      }
+
+    })
+
+  });
+
+//  Change username
+  login.post('/changeUsername/:changeUsernameArray', (req, res) => {
+    console.log(req.params.changeUsernameArray);
+    var changeUserNameArr = req.params.changeUsernameArray;
+    var changeUserName = JSON.parse(changeUserNameArr);
+    console.log(changeUserName);
+    var changeNameQuery = `UPDATE login SET username = '`+ changeUserName.newName +`' where username = '` + changeUserName.name +`' and password = '` + changeUserName.password + `'`;
+    console.log(changeNameQuery);
+    pool.query(changeNameQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Username changed successfully"});
+
+      }
+
+    })
+
+  });
+
+// Change password
+  login.post('/changePassword/:changePasswordArray', (req, res) => {
+    var changePasswordArr = req.params.changePasswordArray;
+    var changePassword = JSON.parse(changePasswordArr);
+
+    var changePasswordQuery = `UPDATE login SET password = '`+ changePassword.newPassword +`' where username = '` + changePassword.name +`' and password = '` + changePassword.password + `'`;
+
+    pool.query(changePasswordQuery, (error, result) => {
+      if(error){
+        res.send({res : 1, data : error});
+      }else{
+        res.send({res : 0, data : "Password changed successfully"});
+      }
+
+    })
+
+  });
+
+
 
 
   //socket io functions

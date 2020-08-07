@@ -7,7 +7,7 @@
     <title>Flag Racer Home</title>
   </head>
   <body>
-    <div class="container">
+    <div class="bContainer">
       <div class="finishLine">
         <div id= "square1" class="square"></div>
         <div id= "square2" class="square"></div>
@@ -20,13 +20,32 @@
       </div>
       <p class="text">Home Page</p>
       <div class="buttonCont">
-
         <button type="button" class="race" onclick="race()">RACE</button>
+        <button type="button" class="addF" onclick="showForm()">ADD FRIEND</button>
         <button type="button" class="chat" onclick="chat()">CHAT</button>
+
+        <div id="fForm" class="formCont">
+          <form class="form" action="index.html" method="post">
+            <div class="container">
+
+              <label for="uname"><b>Enter Friend Username</b></label>
+              <br>
+              <input id = "f_username" type="text" placeholder="Enter Friend Username" name="uname" maxlength="29" required>
+              <br>
+              <input value = "Submit" type="button" onclick="addFriend()">
+
+              <button type="button" onclick="hideForm()" class="cancel">Cancel</button>
+
+            </div>
+          </form>
+        </div>
       </div>
 
       <div class="logoutCont">
         <button type="button" class="logOut" onclick=logout()>LOG OUT</button>
+      </div>
+      <div class="settingsCont">
+        <button type="button" class="settings" onclick="settings()">SETTINGS</button>
       </div>
     </div>
 

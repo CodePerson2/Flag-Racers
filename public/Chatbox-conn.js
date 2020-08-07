@@ -38,7 +38,10 @@ function addFriend(friend){
             
             var res = JSON.parse(this.responseText);
             console.log(res);
-            alert(res.data);
+            if(res.res == 0){
+                document.getElementById("chatlist").innerHTML = '';
+                getfriends();
+            }
             
             
       }

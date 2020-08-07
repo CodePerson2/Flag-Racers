@@ -399,7 +399,11 @@
 */
 #sinkhole {
   position: absolute;
+  background-image: url("/pickups/virus.png");
+  background-size: contain;
+  /*
   background-color: green;
+  */
   top: 150px;
   left: 91%;
 }
@@ -408,7 +412,11 @@
 */
 #speedTrack {
   position: absolute;
+  background-image: url("/pickups/money.png");
+  background-size: contain;
+  /*
   background-color: orange;
+  */
   top: -325px;
   left: 88%;
 }
@@ -417,16 +425,23 @@
 */
 #slowTrack {
   position: absolute;
+  background-image: url("/pickups/stock.png");
+  background-size: contain;
+  /*
   background-color: purple;
+  */
   top: 325px;
   left: 70%;
 }
 /*
   Pickups for instant win
+
+  This was a black color
 */
 #jumptoFinish {
   position: absolute;
-  background-color: black;
+  background-image: url("/pickups/oil.png");
+  background-size: contain;
   top: -200px;
   left: 75%;
 }
@@ -436,7 +451,11 @@
 */
 #crash {
   position: absolute;
+  background-image: url("/pickups/nuclear.png");
+  background-size: contain;
+  /*
   background-color: cyan ;
+  */
   top: -150px;
   left: 80%;
 }
@@ -446,7 +465,11 @@
 */
 #reset {
   position: absolute;
+  background-image: url("/pickups/bomb.png");
+  background-size: contain;
+  /*
   background-color: white;
+  */
   top: 0px;
   left: 50%;
 }
