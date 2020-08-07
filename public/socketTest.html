@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+      <style>
+          .dot{
+              background: blue;
+              border-radius: 50%;
+              position: absolute;
+              width: 100px;
+              height: 100px;
+
+          }
+          #dot1{
+              background: red;
+              left: 0;
+              top: 0;
+          }
+          
+      </style>
+         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+   </head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+    
+   <body>
+       <span id="dot1" class="dot"></span>
+       <span id="dot2" class="dot"></span>
+
+   </body>
+   <script src="socket.js"></script>
+</html>

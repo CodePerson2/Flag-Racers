@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/endPage.css">
+    <script src="/racetrack.js"></script>
+    <title>Race Finished</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div class="pattern">
+        <div id= "square1" class="square"></div>
+        <div id= "square2" class="square"></div>
+        <div id= "square3" class="square"></div>
+        <div id= "square4" class="square"></div>
+        <div id= "square5" class="square"></div>
+        <div id= "square6" class="square"></div>
+        <div id= "square7" class="square"></div>
+        <div id= "square8" class="square"></div>
+      </div>
+      <p class="text">Race Finished</p>
+      <div class="end">
+        <button type="button" class="Restart" onclick="startGame()">RESTART</button>
+        <button type="button" class="Reselect" onclick="selectFlag()">RESELECT FLAG</button>
+        <button type="button" class="Restart" onclick="home()" style="left: -20%;">HOME</button>
+      </div>
+      <div class="logoutCont">
+        <button type="button" class="logOut" onclick=logout()>LOG OUT</button>
+      </div>
+
+    </div>
+  </body>
+
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const page_type = urlParams.get('status');
+    if (page_type === "win"){
+      alert("You win");
+    }
+    else{
+      alert("You lost");
+    }
+    </script>
+</html>
